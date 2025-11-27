@@ -13,6 +13,7 @@ Define consistent, safe logging practices to aid observability without exposing 
 ## Storage & Retention
 - Follow retention policies; avoid unbounded growth.
 - Ensure logs are accessible for debugging but secured against unauthorized access.
+- Apply retention consistently across logs/events/errors; avoid storing sensitive content even temporarily; prefer references and redaction.
 
 ## Documentation
 - Note logging expectations in architecture/API docs when relevant.

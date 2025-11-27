@@ -25,7 +25,7 @@ This standard defines the minimum privacy and data protection requirements (e.g.
 
 ## 5. Retention & Deletion
 - Define retention periods per data category; enforce automatic deletion/archival.
-- Ensure backups and derived stores (analytics, caches) follow the same deletion policy.
+- Ensure backups and derived stores (analytics, caches, logs) follow the same deletion policy; avoid storing PII in logs by default.
 
 ## 6. International Data Transfers
 - Identify data storage regions; avoid cross-region transfers unless lawful basis and safeguards are in place.

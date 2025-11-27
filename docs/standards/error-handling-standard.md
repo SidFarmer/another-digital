@@ -27,3 +27,4 @@ Ensure clear, safe, and consistent error handling across services and apps.
 - Update changelog when adding new error behaviors.
 - Note where errors are returned to the user vs. retained for internal diagnostics.
 - Ensure compliance ties: no PII leakage in errors or logs; align with compliance/logging standards.
+- Retention: follow compliance/logging retention policies; do not persist error payloads longer than required for diagnostics.***
