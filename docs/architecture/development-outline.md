@@ -65,10 +65,6 @@ Carry-forward planning: each phase must include a task to integrate and polish f
    - 0.1.9-B: Apply fixes/tweaks based on findings; update docs/changelog/prompt archive.
    - 0.1.9-C: Capture initial test plan/fixtures approach (even if stubbed) for future phases.
 
-0.1.8 — Testing & Fixes  
-   - 0.1.8-A: Run owner + Codex verification of 0.1 outputs (docs/structure/tooling/CI stubs); log issues.  
-   - 0.1.8-B: Apply fixes/tweaks based on findings; update docs/changelog/prompt archive.
-
 ## Phase 0.2 — Identity, Auth, Localisation & Accessibility Foundations
 - Purpose: Ship basic authentication, user/tenant models (single-tenant), and platform-wide i18n/a11y foundations.
 - Scope: User model, tenant model (single-tenant), session/token handling, login/signup/reset flows; i18n provider, locale switcher; WCAG 2.1 AA baseline baked into UI kit/layout.
