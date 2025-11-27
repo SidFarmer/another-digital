@@ -20,20 +20,20 @@ Defines authentication endpoints for initial phases (0.2). Session/token model i
 - Users are scoped to a single tenant in this phase; tenant metadata may be implicit.
 - TenantId may appear in session payloads for future multi-tenant expansion; enforce single-tenant assumptions in 0.2 docs and APIs.
 
-## Endpoints (Initial)
+## Endpoints (Initial 0.2)
 
 ### POST /api/auth/signup
 - Purpose: create a user (single-tenant owner/standard user).
-- Request: `{ email, password, name, locale? }`
+- Request: `{ email, password, name, locale?, consentVersion?, consentGivenAt?, analyticsOptIn? }`
 - Example:
 ```json
-{ "email": "user@example.com", "password": "Str0ngPass!", "name": "Test User", "locale": "en-US" }
+{ "email": "user@example.com", "password": "Str0ngPass!", "name": "Test User", "locale": "en-US", "consentVersion": "v1", "consentGivenAt": "2024-01-01T00:00:00Z", "analyticsOptIn": true }
 ```
 - Validation: email format, password policy, required name.
-- Response: `{ userId, email, name, locale, token?, sessionId? }`
+- Response: `{ userId, email, name, locale, consentVersion?, analyticsOptIn?, token?, sessionId? }`
 - Response example:
 ```json
-{ "userId": "user-1", "email": "user@example.com", "name": "Test User", "locale": "en-US", "sessionId": "sess-1" }
+{ "userId": "user-1", "email": "user@example.com", "name": "Test User", "locale": "en-US", "consentVersion": "v1", "analyticsOptIn": true, "sessionId": "sess-1" }
 ```
 - Errors: 400 validation, 409 email exists.
 
@@ -50,7 +50,8 @@ Defines authentication endpoints for initial phases (0.2). Session/token model i
 
 ### POST /api/auth/logout
 - Purpose: invalidate session/token.
-- Request: `{ sessionId? }` or via cookie.
+- Auth: required (cookie/header).
+- Request: `{ sessionId? }` when not using cookies; otherwise empty body.
 - Response: `{ success: true }`
 - Error example: `{ "code": "unauthorized", "message": "No active session" }`
 
@@ -71,10 +72,10 @@ Defines authentication endpoints for initial phases (0.2). Session/token model i
 ### GET /api/auth/session
 - Purpose: session introspection.
 - Auth: session/token required.
-- Response: `{ userId, email, name, locale, tenantIds? }`
+- Response: `{ userId, email, name, locale, consentVersion?, analyticsOptIn?, tenantIds? }`
 - Response example:
 ```json
-{ "userId": "user-1", "email": "user@example.com", "name": "Test User", "locale": "en-US", "tenantIds": ["tenant-1"] }
+{ "userId": "user-1", "email": "user@example.com", "name": "Test User", "locale": "en-US", "consentVersion": "v1", "analyticsOptIn": true, "tenantIds": ["tenant-1"] }
 ```
 
 ## Validation (per endpoint)
@@ -84,14 +85,17 @@ Defines authentication endpoints for initial phases (0.2). Session/token model i
 | password (signup/login)      | Yes      | string  | Min 12 chars; mix upper/lower/number/symbol   |
 | name (signup)        | Yes      | string  | 1-100 chars                                   |
 | locale (signup)      | No       | string  | BCP 47 tag; defaults to en-US                 |
+| consentVersion (signup) | No   | string  | Version string for consent policy             |
+| consentGivenAt (signup) | No   | string  | ISO timestamp                                 |
+| analyticsOptIn (signup) | No   | boolean | true/false                                    |
 | token (reset confirm)| Yes      | string  | Non-empty; one-time; expiry enforced          |
 | newPassword          | Yes      | string  | Same policy as password                       |
 | sessionId (logout)   | No       | string  | If cookie not used                            |
 
 ## Tokens/Sessions
-- Use HTTP-only cookies or Authorization header; decide in implementation.
+- Use HTTP-only cookies or Authorization header; prefer secure cookies for browsers to reduce XSS risk; include CSRF protections when cookies are used.
 - Include locale preference; include tenant context later.
-- Expiry/rotation: set reasonable expiry; support rotation/invalidations for security.
+- Expiry/rotation: set reasonable expiry; support rotation/invalidations for security; store session_token hashed if persisted.
 
 ## Locale & Consent
 - Capture preferred locale on signup and in session payloads.
