@@ -1,0 +1,16 @@
+{
+  "name": "another-digital",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@10.19.0",
+  "engines": {
+    "node": ">=20.10.0"
+  },
+  "scripts": {
+    "lint": "echo \"stub: lint (wire up tooling when packages exist)\"",
+    "test": "echo \"stub: test (wire up tooling when packages exist)\"",
+    "typecheck": "echo \"stub: typecheck (wire up tooling when packages exist)\"",
+    "format": "echo \"stub: format (wire up tooling when packages exist)\"",
+    "build": "echo \"stub: build (wire up tooling when packages exist)\""
+  }
+}
