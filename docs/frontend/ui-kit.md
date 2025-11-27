@@ -35,6 +35,7 @@ Provide shared components and design tokens for all apps, enforcing consistency,
 - Overlays: focus trap, return focus on close; ESC and click-outside handling; aria-modal.
 - Tables/Lists: support empty/error/loading states; row focus/keyboard nav; avoid layout thrash on pagination.
 - Auth/Settings UX: login/signup/reset forms must include labels/aria, focus order, keyboard nav, error summaries; locale switcher and consent/notice strings drawn from shared i18n; show non-revealing errors for auth flows.
+- Accessibility baseline: enforce WCAG 2.1 AA—labels tied to inputs, aria-describedby for errors/help, visible focus states, tab/shift-tab ordering, ESC on overlays, prevent focus loss on errors, readable contrast, no reliance on color alone.***
 
 ```mermaid
 graph TD
