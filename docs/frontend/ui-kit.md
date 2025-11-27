@@ -27,6 +27,7 @@ Provide shared components and design tokens for all apps, enforcing consistency,
 - Responsive: components adapt to mobile/desktop; avoid fixed widths; use layout primitives.
 - Theming: consume tokens; allow tenant overrides via theme hooks; never inline brand colors.
 - Composition: favor controlled components; expose minimal props; avoid prop drilling business logic.
+- Cross-app wiring: ensure layout/ui/i18n packages are the source of truth; avoid app-specific forks of components or ad-hoc a11y patterns.
 
 ## Patterns
 - Forms: show validation inline; on submit, show consolidated errors; prevent double-submit; keep assistive text tied to inputs.

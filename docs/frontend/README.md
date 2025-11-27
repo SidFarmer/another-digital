@@ -17,6 +17,7 @@ This document outlines the frontend scope and principles. Implementation follows
 - Handle loading/error/empty/forbidden states consistently
 - Emit consent-aware telemetry with locale/tenant metadata
 - Navigation/shell stubs: layout should expose entry points for LMS, CMS, Admin, Community, Library, Dev Portal, Auth/Profiles; all use shared layout/ui packages and i18n.
+- Accessibility: apply WCAG 2.1 AA patterns (labels, aria, focus/keyboard nav, contrast) via shared UI kit/layout; avoid app-specific accessibility hacks.
 
 ## Integration
 - Use shared packages: layout, ui, i18n, api client, analytics emitter
