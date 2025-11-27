@@ -12,6 +12,7 @@ Ensure every change is linted, tested, and type-checked; deploy safely to stagin
   - Typecheck (`pnpm typecheck` — stub)
 - Tooling versions: Node 20.10.0, pnpm 10.19.0 (see `.nvmrc`, `.npmrc`).
 - Gates: all checks must pass before merge/deploy (will enforce when checks are real).
+- Migrations/versioning: once schemas and migration tooling are added, CI will run migration checks (e.g., lint/validate migrations, ensure up/down apply in a temp db). Add commands here when implemented.
 
 ## Smoke Tests (add when code exists)
 - Post-deploy checklist (staging then prod):
