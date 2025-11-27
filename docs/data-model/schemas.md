@@ -8,6 +8,9 @@ This file outlines core schemas for early phases. Details will be reflected in t
 - `passwordHash`
 - `name`
 - `locale`
+- `consentGivenAt?`
+- `consentVersion?`
+- `analyticsOptIn?` (boolean)
 - `createdAt` / `updatedAt`
 
 ## Tenants (placeholder early; expanded later)
@@ -21,6 +24,8 @@ This file outlines core schemas for early phases. Details will be reflected in t
 - `userId`
 - `expiresAt`
 - `createdAt`
+- `lastAccessedAt?`
+- `sessionToken?` (http-only cookie/header ref)
 
 ## Courses
 - `id` (uuid)

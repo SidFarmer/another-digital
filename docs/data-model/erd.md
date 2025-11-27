@@ -5,7 +5,7 @@ Entities and key relationships (initial phases):
 - Users 1—* Sessions
 - Users *—* Courses via Enrolments
 - Users 1—1 Profiles
-- Tenants 1—* Users (later)
+- Tenants 1—* Users (single-tenant placeholder early; expands later)
 - Tenants 1—* Courses (later)
 - Courses 1—* Modules
 - Modules 1—* Lessons
@@ -59,9 +59,9 @@ Note: Diagram is simplified; tenant relationships are introduced in later phases
 - RLS: when multi-tenant is enabled, enforce row-level security on tenant-scoped tables and include `tenantId` in all FK relations and queries.
 
 ## Key Attributes (Summary)
-- Users: id (uuid), email (unique), passwordHash, name, locale, createdAt/updatedAt
+- Users: id (uuid), email (unique), passwordHash, name, locale, consent flags (e.g., consentGivenAt, consentVersion, analyticsOptIn), createdAt/updatedAt
 - Tenants: id (uuid), name, defaultLocale, createdAt/updatedAt
-- Sessions: id, userId, expiresAt, createdAt
+- Sessions: id, userId, expiresAt, createdAt, lastAccessedAt?, session token ref (cookie/header)
 - Courses: id, title, description, status (draft|published), locale, tenantId?, createdAt/updatedAt
 - Modules: id, courseId, title, orderIndex, createdAt/updatedAt
 - Lessons: id, moduleId, title, status, orderIndex, locale, blocks (jsonb), createdAt/updatedAt

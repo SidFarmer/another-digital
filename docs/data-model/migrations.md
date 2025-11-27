@@ -3,7 +3,7 @@
 Doc-first: define schema changes here before implementing migrations.
 
 ## Initial Phases (0.2–0.3)
-- Users, Tenants (placeholder), Sessions tables.
+- Users, Tenants (placeholder), Sessions tables (include locale, consent flags on users; lastAccessed/session token refs on sessions).
 - Courses, Modules, Lessons (with blocks jsonb).
 - Enrolments.
 - Progress.

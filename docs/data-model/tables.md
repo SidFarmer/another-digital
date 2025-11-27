@@ -6,6 +6,9 @@
 - `password_hash` text not null
 - `name` text not null
 - `locale` text
+- `consent_given_at` timestamptz null
+- `consent_version` text null
+- `analytics_opt_in` boolean null
 - `created_at` timestamptz not null
 - `updated_at` timestamptz not null
 
@@ -20,6 +23,8 @@
 - `id` uuid PK
 - `user_id` uuid FK users
 - `expires_at` timestamptz not null
+- `last_accessed_at` timestamptz null
+- `session_token` text null (http-only cookie/header ref; hashed if stored)
 - `created_at` timestamptz not null
 
 ## Courses
