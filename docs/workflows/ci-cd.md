@@ -4,13 +4,14 @@
 Ensure every change is linted, tested, and type-checked; deploy safely to staging/beta, then production.
 
 ## Pipelines (initial)
-- Triggers: on pull requests and main branch pushes.
-- Steps (initial skeleton):
+- Triggers: pull requests; pushes to `main`, `dev`, `test`.
+- Steps (initial skeleton; stubs until code exists):
   - Install dependencies (`pnpm install`)
-  - Lint (`pnpm lint`)
-  - Test (`pnpm test`)
-  - Typecheck (`pnpm typecheck`)
-- Gates: all checks must pass before merge/deploy.
+  - Lint (`pnpm lint` — stub)
+  - Test (`pnpm test` — stub)
+  - Typecheck (`pnpm typecheck` — stub)
+- Tooling versions: Node 20.10.0, pnpm 10.19.0 (see `.nvmrc`, `.npmrc`).
+- Gates: all checks must pass before merge/deploy (will enforce when checks are real).
 
 ## Smoke Tests (add when code exists)
 - Post-deploy checklist (staging then prod):
