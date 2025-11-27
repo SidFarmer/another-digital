@@ -34,6 +34,7 @@ Provide shared components and design tokens for all apps, enforcing consistency,
 - Buttons/Links: use correct semantics (button vs link); disable vs forbidden messaging per permission system.
 - Overlays: focus trap, return focus on close; ESC and click-outside handling; aria-modal.
 - Tables/Lists: support empty/error/loading states; row focus/keyboard nav; avoid layout thrash on pagination.
+- Auth/Settings UX: login/signup/reset forms must include labels/aria, focus order, keyboard nav, error summaries; locale switcher and consent/notice strings drawn from shared i18n; show non-revealing errors for auth flows.
 
 ```mermaid
 graph TD

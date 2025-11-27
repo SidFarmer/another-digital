@@ -18,6 +18,7 @@ This document outlines the frontend scope and principles. Implementation follows
 - Emit consent-aware telemetry with locale/tenant metadata
 - Navigation/shell stubs: layout should expose entry points for LMS, CMS, Admin, Community, Library, Dev Portal, Auth/Profiles; all use shared layout/ui packages and i18n.
 - Accessibility: apply WCAG 2.1 AA patterns (labels, aria, focus/keyboard nav, contrast) via shared UI kit/layout; avoid app-specific accessibility hacks.
+- i18n: supported locales include default `en-US`; provide fallback; locale switcher in shell and settings; auth/settings screens must pull strings from shared i18n namespaces.
 
 ## Integration
 - Use shared packages: layout, ui, i18n, api client, analytics emitter
