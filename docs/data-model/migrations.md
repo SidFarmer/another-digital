@@ -23,3 +23,6 @@ Doc-first: define schema changes here before implementing migrations.
 - Include audit fields (`created_at`, `updated_at`).
 - Add tenantId/locale fields where applicable.
 - Record each migration with rationale and affected docs.***
+- Naming/versioning: prefix migrations with timestamp and scope (e.g., `20240101_auth_users_sessions.sql`); keep doc-first updates here and link to affected schema/table docs.
+- CI discipline: once migration tooling is in place, run migration lint/validate and apply/revert in CI; block if pending migrations aren’t documented.
+- Rollback/forward: define rollback steps for auth migrations; ensure session/token data can be safely rotated if schema changes.***
