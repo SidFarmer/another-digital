@@ -9,7 +9,7 @@ This repository contains the documentation and (future) implementation of the mu
 - Development outline (roadmap): `docs/architecture/development-outline.md`
 - Standards entry point: `docs/standards/README.md`
 - PR checklist: `docs/workflows/pr-checklist.md`
-- Changelog: `CHANGELOG.md`
+- Changelog: `CHANGELOG.md` (update for notable user- or developer-facing changes at phase completion/merges)
 
 ## Repository structure (high level)
 
