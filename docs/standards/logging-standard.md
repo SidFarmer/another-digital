@@ -5,10 +5,10 @@ Define consistent, safe logging practices to aid observability without exposing 
 
 ## Requirements
 - Use structured logs with levels (debug/info/warn/error); include correlation/request IDs.
-- Do not log PII, secrets, tokens, or credentials; mask/redact sensitive fields.
+- Do not log PII, secrets, tokens, or credentials; mask/redact sensitive fields. Avoid logging raw user input; prefer references/ids.
 - Keep logs concise; avoid dumping large payloads; reference IDs instead.
-- Log key lifecycle events (auth, permission denials, tenant changes) with care and no sensitive content.
-- Ensure logs support multi-tenant context (tenantId, userId when safe).
+- Log key lifecycle events (auth, permission denials, tenant changes) with care and no sensitive content. Include tenant context when safe.
+- Ensure logs support multi-tenant context (tenantId, userId when safe) and avoid cross-tenant leakage.
 
 ## Storage & Retention
 - Follow retention policies; avoid unbounded growth.
