@@ -14,6 +14,13 @@ Ensure every change is linted, tested, and type-checked; deploy safely to stagin
 - Gates: all checks must pass before merge/deploy (will enforce when checks are real).
 - Migrations/versioning: once schemas and migration tooling are added, CI will run migration checks (e.g., lint/validate migrations, ensure up/down apply in a temp db). Add commands here when implemented.
 
+## Test Strategy (stub for future phases)
+- Unit: expected for shared packages and services once code exists; run in CI.
+- Integration/API: add when services land; include fixture data and temp DB (e.g., Neon) if needed.
+- E2E/UI: add when apps exist; focus on critical flows (auth, nav/shell, content creation/view).
+- Fixtures: start with documented sample data/env configs; avoid secrets; use temp/test tenants/users.
+- CI gating: lint/test/typecheck required; extend gates as real tests are added.***
+
 ## Smoke Tests (add when code exists)
 - Post-deploy checklist (staging then prod):
   - Auth: signup/login/logout; password reset flow stub.
