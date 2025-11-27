@@ -93,7 +93,8 @@ Defines authentication endpoints for initial phases (0.2). Session/token model i
 | sessionId (logout)   | No       | string  | If cookie not used                            |
 
 ## Tokens/Sessions
-- Use HTTP-only cookies or Authorization header; prefer secure cookies for browsers to reduce XSS risk; include CSRF protections when cookies are used.
+- Use HTTP-only cookies for browser clients; support Authorization header (Bearer) if needed. Prefer secure cookies to reduce XSS risk; include CSRF protections when cookies are used.
+- Do not store tokens in localStorage/sessionStorage; avoid exposing tokens to JS when possible.
 - Include locale preference; include tenant context later.
 - Expiry/rotation: set reasonable expiry; support rotation/invalidations for security; store session_token hashed if persisted.
 
