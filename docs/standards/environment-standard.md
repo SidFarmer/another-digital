@@ -9,11 +9,16 @@ Define how environment configuration is managed, loaded, and validated across se
 - Validate required vars at startup; fail fast with clear errors.
 - Separate envs: local, staging/beta, production. Document differences.
 - Keep environment-specific overrides minimal; prefer consistent defaults.
+- Do not supply unsafe fallbacks for required secrets; require explicit values.
 
 ## Loading & Names
 - Use a central config loader (per `packages/config` when implemented); avoid scattered `process.env` access.
 - Naming: uppercase snake case with prefixes (e.g., `APP_ENV`, `API_BASE_URL`, `NEON_URL`, `SANITY_PROJECT_ID`, `PAYMENTS_PROVIDER_KEY`).
 - Include locale/tenant defaults where relevant.
+- Central loader responsibilities:
+  - Load from `.env`/`.env.local` (local only), and environment-specific sources for staging/prod (e.g., CI/secret manager).
+  - Validate required keys and types; emit clear errors on startup.
+  - Redact/mask sensitive values in logs/errors; never echo secrets.
 
 ## Security
 - Secrets stored in secure secret managers for non-local envs; never log secrets.

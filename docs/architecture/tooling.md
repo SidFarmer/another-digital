@@ -26,6 +26,12 @@
 ## i18n & a11y
 - All user-facing strings must use shared i18n package; enforce accessibility patterns in UI kit.
 
+## Environment & Config (baseline)
+- Use a central config loader (planned `packages/config`) instead of scattered `process.env` access.
+- Sources: local `.env`/`.env.local` (never committed); staging/prod from secret managers/CI env vars.
+- Validation: fail fast on startup if required vars are missing/invalid; no unsafe defaults for secrets.
+- Redaction: never log secrets; mask sensitive values in errors/logging; align with security/compliance standards.
+
 ## Notes
 - Install Turborepo locally with `pnpm dlx turbo@1.12.3` for now; update/pin once commands are wired.
 - Update this file when tool versions or hosting targets change; add concrete command wiring once workspace is initialized.
