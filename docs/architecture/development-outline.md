@@ -23,7 +23,7 @@ Carry-forward planning: each phase must include a task to integrate and polish f
 ### Phase 0.1 Sub-Phases (Prompt Checklist)
 0.1.1 — Docs & Standards Completion  
    - 0.1.1-A: Populate remaining standards (developer, documentation, code-style, naming, testing, task-format, git-workflow).  
-   - 0.1.1-B: Finalize environment, filesystem guardrails, security, compliance, doc-first standards.  
+   - 0.1.1-B: Finalize environment, filesystem guardrails, security, compliance, doc-first standards.   
    - 0.1.1-C: Sync `docs/README.md` and `docs/index.md` with the standards hierarchy.
    - 0.1.1-D (optional): Add repo hygiene docs (license/CONTRIBUTING/branch strategy) if open-sourcing early.
 
