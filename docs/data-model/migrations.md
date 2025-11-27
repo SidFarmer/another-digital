@@ -3,7 +3,10 @@
 Doc-first: define schema changes here before implementing migrations.
 
 ## Initial Phases (0.2–0.3)
-- Users, Tenants (placeholder), Sessions tables (include locale, consent flags on users; lastAccessed/session token refs on sessions).
+- Users: email unique, password_hash, name, locale, consent fields (consent_given_at, consent_version, analytics_opt_in), timestamps.
+- Sessions: user FK, expires_at, last_accessed_at, session_token (hashed if stored), timestamps.
+- Tenants (placeholder): name, default_locale, timestamps.
+- Additional tables per content/community scope (courses/modules/lessons/enrolments/progress/forums/threads/posts/profiles/plugins registry).
 - Courses, Modules, Lessons (with blocks jsonb).
 - Enrolments.
 - Progress.
