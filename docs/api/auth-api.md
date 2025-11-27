@@ -119,6 +119,10 @@ Defines authentication endpoints for initial phases (0.2). Session/token model i
 
 ## Future (later phases)
 - MFA, SSO/SAML/OIDC, account lockout, device/session management.***
+- Device/session management: list active sessions/devices; revoke individually; bind session metadata (user agent, lastAccessed).
+- Lockout & fraud controls: lock after repeated failures; add captcha/throttling as needed.
+- MFA: OTP/app-based; policy per tenant (later); extend login/signup flows accordingly.
+- SSO/OIDC/SAML: add `/api/auth/oidc/*` as needed; validate IdP assertions server-side; map roles cautiously; tie to tenant context.
 
 ## Additional Notes (future)
 - Lockout: after N failed logins, return 423 `account_locked`; add unlock via reset flow or cooldown.
