@@ -1,0 +1,43 @@
+# Documentation Index
+
+Use this index to jump to the right area. Each section links to its local README or primary overview file.
+
+- Architecture
+  - `docs/architecture/overview.md` — high-level system description and domains
+  - `docs/architecture/development-outline.md` — phase roadmap and milestones
+  - `docs/architecture/monorepo-structure.md` — required repo layout
+  - `docs/architecture/tooling.md` — tooling, versions, and workflows
+- Standards
+  - `docs/standards/README.md` — index of standards
+  - `docs/standards/codex-standard.md` and `docs/standards/developer-standard.md` — required behaviors
+  - `docs/standards/documentation-standard.md`, `docs/standards/code-style-standard.md`, `docs/standards/naming-conventions.md` — doc and code rules
+  - `docs/standards/compliance-standard.md` — privacy, data protection, consent requirements
+  - Additional: `docs/standards/testing-standard.md`, `docs/standards/task-format.md`, `docs/standards/prompt-archiving-standard.md`, `docs/standards/git-workflow.md`, `docs/standards/environment-standard.md`, `docs/standards/filesystem-guardrails.md`, `docs/standards/dependency-guidelines.md`, `docs/standards/scope-contract.md`, `docs/standards/security-standard.md`, `docs/standards/doc-first-development.md`, `docs/standards/doc-comment-policy.md`, `docs/standards/error-handling-standard.md`, `docs/standards/logging-standard.md`, `docs/standards/codex-checklist.md`, `docs/standards/privacy-impact-template.md`, `docs/standards/schema-consistency.md`, `docs/standards/task-protocol.md`
+- Data Model
+  - `docs/data-model/README.md` — data model entry point
+  - `docs/data-model/erd.md`, `docs/data-model/schemas.md`, `docs/data-model/tables.md`, `docs/data-model/migrations.md` — ERD and schema definitions
+- API
+  - `docs/api/README.md` — API entry point
+  - Service-specific specs: `auth-api.md`, `content-api.md`, `progress-api.md`, `entity-api.md`, `roles-api.md`, `events-api.md`, `plugin-management-api.md`, `marketplace-api.md`, `community-api.md`, `profile-api.md`
+- Backend
+  - `docs/backend/README.md` — backend architecture overview
+  - Service docs: `api-service.md`, `permission-engine.md`, `event-ingestion.md`, `content-engine.md`
+- Frontend
+  - `docs/frontend/README.md` — frontend architecture overview
+  - App docs: `lms-app.md`, `cms-app.md`, `admin-app.md`
+  - Shared UI: `ui-kit.md`, `rendering-engine.md`
+- Content Engine
+  - `docs/content-engine/README.md` — content engine overview
+  - Block and editor docs: `content-engine-overview.md`, `block-schema.md`, `custom-blocks.md`, `editor-architecture.md`, `content-storage-options.md`
+- Plugins
+  - `docs/plugins/README.md` — plugin system overview
+  - Specs: `plugin-manifest.md`, `plugin-development-api.md`, `sandbox-api.md`, `extension-points.md`
+- Analytics
+  - `docs/analytics/README.md` — analytics overview
+  - Details: `event-types.md`, `data-retention.md`, `warehouse-integration.md`
+- Workflows
+  - `docs/workflows/README.md` — workflow entry point
+  - Guides: `local-development.md`, `ci-cd.md`, `releases.md`, `versioning.md`, `production-deployment.md`, `release-preflight.md`, `postmortem-template.md`, `pr-checklist.md`
+- Prompts
+  - `prompts/README.md` — prompt archive overview
+  - `prompts/prompt-archive/README.md` and phase folders (e.g., `prompts/prompt-archive/0.1/README.md`) — task intake and archiving process

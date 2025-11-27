@@ -1,0 +1,25 @@
+# Frontend Overview
+
+This document outlines the frontend scope and principles. Implementation follows the development outline phases.
+
+## Apps
+- LMS (student): lesson playback, progress, recommendations (later)
+- CMS (creator/tenant): course/module/lesson authoring, interactive blocks
+- Admin/Owner: analytics, tenant/user management, marketplace moderation (later)
+- Community: forums, profiles
+- Library: discovery and featured toolkit/courses
+- Dev Portal: plugin/dev docs (later)
+- Auth: login/signup/reset
+
+## Principles
+- Shared layout (header/sidebars/footer), UI kit, and i18n across apps
+- Externalise all user-facing strings; apply accessibility (WCAG) patterns
+- Handle loading/error/empty/forbidden states consistently
+- Emit consent-aware telemetry with locale/tenant metadata
+
+## Integration
+- Use shared packages: layout, ui, i18n, api client, analytics emitter
+- Respect permissions/tenant scope for navigation and module visibility
+
+## Future
+- Theming/customisation for tenants; richer dashboards; workspace entry points; marketplace flows as later phases land.***

@@ -1,0 +1,23 @@
+## Standards Index
+
+- Codex Standard: `docs/standards/codex-standard.md`
+- Developer Standard: `docs/standards/developer-standard.md`
+- Documentation Standard: `docs/standards/documentation-standard.md`
+- Code Style Standard: `docs/standards/code-style-standard.md`
+- Naming Conventions: `docs/standards/naming-conventions.md`
+- Testing Standard: `docs/standards/testing-standard.md`
+- Task Format: `docs/standards/task-format.md`
+- Prompt Archiving: `docs/standards/prompt-archiving-standard.md`
+- Git Workflow: `docs/standards/git-workflow.md`
+- Environment Standard: `docs/standards/environment-standard.md`
+- Filesystem Guardrails: `docs/standards/filesystem-guardrails.md`
+- Dependency Guidelines: `docs/standards/dependency-guidelines.md`
+- Scope Contract: `docs/standards/scope-contract.md`
+- Security Standard: `docs/standards/security-standard.md`
+- Compliance Standard: `docs/standards/compliance-standard.md`
+- Doc-First Development: `docs/standards/doc-first-development.md`
+- Doc & Comment Policy: `docs/standards/doc-comment-policy.md`
+- Error Handling Standard: `docs/standards/error-handling-standard.md`
+- Logging Standard: `docs/standards/logging-standard.md`
+- Codex Checklist: `docs/standards/codex-checklist.md`
+- Privacy Impact Template: `docs/standards/privacy-impact-template.md`
