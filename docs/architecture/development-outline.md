@@ -34,9 +34,9 @@ Carry-forward planning: each phase must include a task to integrate and polish f
 0.1.3 — Tooling & Commands  
    - 0.1.3-A: Define required tool versions in `docs/architecture/tooling.md` (node, pnpm, turborepo, lint/test tooling).  
    - 0.1.3-B: Document standard commands for lint, test, typecheck, format (even if stubbed).
-   - 0.1.3-C (optional): Specify pre-commit hooks/tooling expectations (format/lint) if enforcing locally.
-   - 0.1.3-D: Document stack choices and separation: backend on Node/Express with Neon; content via Sanity; Turborepo/pnpm for workspace; Husky for hooks; frontend/backends deployed separately (e.g., Vercel for frontend, Render or equivalent for backend); clarify boundaries between frontend/backend packages/apps.
-   - 0.1.3-E: Populate `docs/architecture/tooling.md` with the above decisions and commands references.
+   - 0.1.3-C: Document stack choices and separation: backend on Node/Express with Neon; content via Sanity; Turborepo/pnpm for workspace; Husky for hooks; frontend/backends deployed separately (e.g., Vercel for frontend, Render or equivalent for backend); clarify boundaries between frontend/backend packages/apps.
+   - 0.1.3-D: Populate `docs/architecture/tooling.md` with the above decisions and commands references.
+   - 0.1.3-E (optional): Specify pre-commit hooks/tooling expectations (format/lint) if enforcing locally.
 
 0.1.4 — Prompt Archive & Changelog Process  
    - 0.1.4-A: Ensure `prompts/prompt-archive` structure and README describe intake/archiving flow.  
