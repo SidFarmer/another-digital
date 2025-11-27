@@ -13,12 +13,11 @@
 
 ## Commands (initial skeleton; stubs until code exists)
 - Install: `pnpm install`
-- Lint: `pnpm lint` (stub)
-- Test: `pnpm test` (stub)
-- Typecheck: `pnpm typecheck` (stub)
-- Format: `pnpm format` (stub)
-- Build: `pnpm build` (stub)
-  - Stubs echo placeholders in root `package.json` until tooling is wired.
+- Lint: `pnpm lint` (stub; echoes placeholder until tooling wired)
+- Test: `pnpm test` (stub; echoes placeholder until tooling wired)
+- Typecheck: `pnpm typecheck` (stub; echoes placeholder until tooling wired)
+- Format: `pnpm format` (stub; echoes placeholder until tooling wired)
+- Build: `pnpm build` (stub; echoes placeholder until tooling wired)
 
 ## Lint/Format/Test Tools
 - Linting/formatting: per code-style standard (configured via workspace)
