@@ -7,6 +7,18 @@ Defines authentication endpoints for initial phases (0.2). Session/token model i
 - Tokens/sessions must be HTTP-only/secure where applicable; no PII in errors.
 - Responses are JSON; fields use lowerCamelCase.
 - All user-facing messages are externalised in the client via i18n.
+- Single-tenant context for 0.2: users belong to a single tenant; tenantId may be implicit/omitted until multi-tenant phases.
+- Session/token lifecycle is documented below; use secure cookies/headers and explicit expiry/rotation.
+
+## Session & Token Lifecycle (0.2 scope)
+- Creation: on signup/login, issue session/token (HTTP-only cookie or auth header) with expiry; associate with user (and tenantId when present).
+- Introspection: `/api/auth/session` returns user profile context and tenantIds (single-tenant early).
+- Invalidation: logout invalidates current session/token; support rotation/refresh in later phases.
+- Locale/consent: include preferred locale in session payload; add consent flags when available; ensure consent-aware analytics.
+
+## User/Tenant Relationship (0.2 single-tenant)
+- Users are scoped to a single tenant in this phase; tenant metadata may be implicit.
+- TenantId may appear in session payloads for future multi-tenant expansion; enforce single-tenant assumptions in 0.2 docs and APIs.
 
 ## Endpoints (Initial)
 
