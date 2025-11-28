@@ -15,3 +15,19 @@ export function trackAuthEvent(event: AuthEvent, data: AuthEventData) {
     console.debug("[auth-event]", event, data);
   }
 }
+
+export function trackLogin(locale?: string, tenantId?: string) {
+  trackAuthEvent("login", { locale, tenantId });
+}
+
+export function trackSignup(locale?: string, tenantId?: string, consent?: boolean, analyticsOptIn?: boolean) {
+  trackAuthEvent("signup", { locale, tenantId, consent, analyticsOptIn });
+}
+
+export function trackResetRequest(locale?: string, tenantId?: string) {
+  trackAuthEvent("reset_request", { locale, tenantId });
+}
+
+export function trackSettingsSave(locale?: string, tenantId?: string, analyticsOptIn?: boolean) {
+  trackAuthEvent("settings_save", { locale, tenantId, analyticsOptIn });
+}

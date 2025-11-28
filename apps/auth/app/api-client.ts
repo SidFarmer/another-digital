@@ -1,6 +1,6 @@
 "use client";
 
-import { trackAuthEvent } from "./telemetry";
+import { trackLogin, trackResetRequest, trackSettingsSave, trackSignup } from "./telemetry";
 
 type AuthPayload = {
   email: string;
@@ -44,7 +44,7 @@ export async function login(payload: AuthPayload): Promise<AuthResponse> {
       locale: payload.locale ?? "en-US",
       sessionId: "sess-1"
     };
-    trackAuthEvent("login", { locale: res.locale });
+    trackLogin(res.locale);
     return res;
   });
 }
@@ -61,11 +61,7 @@ export async function signup(payload: AuthPayload): Promise<AuthResponse> {
       locale: payload.locale ?? "en-US",
       sessionId: "sess-2"
     };
-    trackAuthEvent("signup", {
-      locale: res.locale,
-      consent: payload.consent ?? false,
-      analyticsOptIn: payload.analyticsOptIn ?? false
-    });
+    trackSignup(res.locale, undefined, payload.consent ?? false, payload.analyticsOptIn ?? false);
     return res;
   });
 }
@@ -73,17 +69,14 @@ export async function signup(payload: AuthPayload): Promise<AuthResponse> {
 export async function requestReset(payload: { email: string }) {
   return simulate(() => {
     if (!payload.email) throw new Error("invalid_request");
-    trackAuthEvent("reset_request", {});
+    trackResetRequest();
     return { success: true };
   });
 }
 
 export async function saveSettings(payload: SettingsPayload) {
   return simulate(() => {
-    trackAuthEvent("settings_save", {
-      locale: payload.locale,
-      analyticsOptIn: payload.analyticsOptIn
-    });
+    trackSettingsSave(payload.locale, undefined, payload.analyticsOptIn);
     return { success: true };
   });
 }
