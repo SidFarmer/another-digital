@@ -121,15 +121,20 @@ Carry-forward planning: each phase must include a task to integrate and polish f
    - 0.2.8-B: Verify all auth/settings UI strings are externalised; apply a11y patterns; ensure consistent theming/layout.  
    - 0.2.8-C: Plan cross-surface redirects and error/success messaging UX.
 
-0.2.9 — Integration & Hardening (Skeleton)  
-   - 0.2.9-A: Plan wiring of auth UI to auth API, token storage, error handling, and redirect flows.  
-   - 0.2.9-B: Define telemetry events for auth (login/signup/reset) with locale/tenant metadata.  
-   - 0.2.9-C: Update docs/changelog/prompt archive after completing implementation prompts.
+0.2.9 — Auth/I18n/A11y Skeleton Implementation (Catch-Up)  
+   - 0.2.9-A: Deliver auth frontend skeleton (login/signup/reset/settings) using shared layout/ui/i18n with locale switcher and consent/analytics toggle (stubs acceptable).  
+   - 0.2.9-B: Scaffold shared i18n package (provider/hooks, per-app bundles) and add sample namespaces for auth/settings; add eslint-plugin-jsx-a11y to CI when ready.  
+   - 0.2.9-C: Wire shell nav stubs for auth/settings; ensure accessibility patterns are applied; keep CI green with stubs.
 
-0.2.10 — Testing & Fixes  
-   - 0.2.10-A: Run owner + Codex verification of auth/i18n/a11y flows and docs; log issues.  
-   - 0.2.10-B: Apply fixes/tweaks; ensure all strings are externalised; update docs/changelog/prompt archive.
-   - 0.2.10-C: Capture test plan/fixtures (even stubbed) for auth/i18n/a11y flows.
+0.2.10 — Integration & Hardening (Skeleton)  
+   - 0.2.10-A: Plan wiring of auth UI to auth API, token storage, error handling, and redirect flows.  
+   - 0.2.10-B: Define telemetry events for auth (login/signup/reset) with locale/tenant metadata.  
+   - 0.2.10-C: Update docs/changelog/prompt archive after completing implementation prompts.
+
+0.2.11 — Testing & Fixes  
+   - 0.2.11-A: Run owner + Codex verification of auth/i18n/a11y flows and docs; log issues.  
+   - 0.2.11-B: Apply fixes/tweaks; ensure all strings are externalised; update docs/changelog/prompt archive.
+   - 0.2.11-C: Capture test plan/fixtures (even stubbed) for auth/i18n/a11y flows.
 
 ### 0.1 / 0.2 Consistency Checklist
 - Standards complete and reflected in `docs/README.md` and `docs/index.md`: developer, documentation, code-style, naming, testing, task-format, git-workflow, environment, filesystem guardrails, security, compliance, doc-first (plus optional license/CONTRIBUTING/branch strategy).
@@ -143,6 +148,8 @@ Carry-forward planning: each phase must include a task to integrate and polish f
 - Frontend auth/settings UI planned: login/signup/reset screens, settings/locale selector; all strings externalised via shared i18n.
 - Compliance hooks: consent/notice placeholders, DSR notes for account data.
 - Telemetry/events defined for auth with locale/tenant metadata; docs/changelog/prompt archive updated after implementation.
+
+**Implementation rule for phases 0.3+ (forward):** every sub-phase includes both documentation/spec updates **and** skeleton implementation (UI/API/schema/migrations/config) unless explicitly marked doc-only. Docs lead, but deliverables must include runnable stubs/skeletons per scope.***
 
 ## Phase 0.3 — Content & Course Skeleton (CMS + LMS)
 - Purpose: Define course/module/lesson structure, internal content storage API, and minimal CMS/LMS surfaces.
@@ -161,66 +168,65 @@ Carry-forward planning: each phase must include a task to integrate and polish f
 - Skeleton → Full: Skeleton authoring/player here; richer blocks, assessments, versioning, and full CMS workflows later (build out in subsequent phases).
 
 ### Phase 0.3 Sub-Phases (Prompt Checklist)
-0.3.1 — Docs & Specs  
-   - 0.3.1-A: Document course/module/lesson structures, block model, and content lifecycle (draft/publish/version notes).  
-   - 0.3.1-B: Define content storage approach (internal DB vs headless Sanity) and how Neon/Sanity split data.  
-   - 0.3.1-C: Specify Content API (CRUD, publish/unpublish, draft handling, validation, error states).  
-   - 0.3.1-D: Capture UX notes for CMS editor and LMS player (flows, states, navigation), including student dashboard expectations.
-   - 0.3.1-E: Document content localisation approach (per-locale fields vs translation references, fallbacks).
-   - 0.3.1-F: Define initial interactive/embedded block types (e.g., math/LaTeX renderer, chemistry elements/structures, physics visualisations, biology diagrams, code sandbox, YouTube/media embed) and their UX.
-   - 0.3.1-G: Document enrolment flows (enrol/unenrol), student dashboard course cards with progress, and role-based visibility expectations for dashboard content.
+0.3.1 — Docs & Specs (and initial stubs)  
+   - 0.3.1-A: Document course/module/lesson structures, block model, and content lifecycle (draft/publish/version notes); create placeholder schemas/tables.  
+   - 0.3.1-B: Define content storage approach (internal DB vs headless Sanity) and how Neon/Sanity split data; stub adapters/clients.  
+   - 0.3.1-C: Specify Content API (CRUD, publish/unpublish, draft handling, validation, error states); scaffold routes/controllers stubs.  
+   - 0.3.1-D: Capture UX notes for CMS editor and LMS player (flows, states, navigation), including student dashboard expectations; stub UI routes.  
+   - 0.3.1-E: Document content localisation approach (per-locale fields vs translation references, fallbacks); prep locales in schemas/API.  
+   - 0.3.1-F: Define initial interactive/embedded block types (math/chem/physics/biology/code sandbox/media) and their UX; stub block type registry.  
+   - 0.3.1-G: Document enrolment flows (enrol/unenrol), dashboard course cards with progress, role-based visibility; stub enrolment endpoints/UI placeholders.
 
 0.3.2 — Schema/Data Layer  
-   - 0.3.2-A: Define schemas for courses, modules, lessons, blocks, content versions, and localisation fields; include relationships.  
-   - 0.3.2-B: Outline migrations in docs (no code yet) for Neon; note Sanity schema shape if applicable.  
-   - 0.3.2-C: Ensure compliance fields (timestamps, author, locale) are present.
-   - 0.3.2-D: Define migration/versioning discipline for content-related schemas once code begins.
-   - 0.3.2-E: Describe data shape for interactive blocks (math/chem/code sandbox/media) and any external asset references.
-   - 0.3.2-F: Add enrolment schema (user↔course bindings, status, timestamps) to support dashboard course lists.
+   - 0.3.2-A: Define schemas for courses, modules, lessons, blocks, content versions, localisation fields; include relationships and indexes; add migration stubs.  
+   - 0.3.2-B: Outline and stub migrations for Neon; note Sanity schema shape if applicable.  
+   - 0.3.2-C: Ensure compliance fields (timestamps, author, locale) are present; include in schema/migration stubs.
+   - 0.3.2-D: Define migration/versioning discipline for content-related schemas; prep initial migration scripts.  
+   - 0.3.2-E: Describe data shape for interactive blocks (math/chem/code sandbox/media) and external asset references; stub schema fragments.  
+   - 0.3.2-F: Add enrolment schema (user↔course bindings, status, timestamps) to support dashboard course lists; migration stubs included.
 
 0.3.3 — Content API & Domain Logic  
-   - 0.3.3-A: Detail endpoints for content CRUD, publish/unpublish, draft retrieval, and block operations.  
-   - 0.3.3-B: Define validation rules for content/block payloads and error handling patterns.  
-   - 0.3.3-C: Note future extensions (assessments, version history) for later phases.
-   - 0.3.3-D: Include handling notes for interactive blocks (e.g., sandbox config, media embed safety, math/chem payload validation).
-   - 0.3.3-E: Define enrol/unenrol APIs and list/enrolment retrieval for dashboard course cards.
+   - 0.3.3-A: Detail endpoints for content CRUD, publish/unpublish, draft retrieval, and block operations; create API route stubs.  
+   - 0.3.3-B: Define validation rules for content/block payloads and error handling patterns; add validation placeholders.  
+   - 0.3.3-C: Note future extensions (assessments, version history) for later phases.  
+   - 0.3.3-D: Include handling notes for interactive blocks (sandbox config, media embed safety, math/chem payload validation); stub handlers.  
+   - 0.3.3-E: Define enrol/unenrol APIs and list/enrolment retrieval for dashboard course cards; stub endpoints.
 
 0.3.4 — CMS Editor UI (Skeleton)  
-   - 0.3.4-A: Design skeleton editor (create/edit lesson) with block picker placeholder and save/publish states.  
-   - 0.3.4-B: Ensure UI uses shared UI kit/layout, i18n externalised strings, and a11y patterns.  
-   - 0.3.4-C: Plan state management/data fetching for content forms (even if stubbed).
-   - 0.3.4-D: Include placeholders/controls for interactive blocks (math/chem/code sandbox/media embed) with UX notes.
+   - 0.3.4-A: Design and implement skeleton editor (create/edit lesson) with block picker placeholder and save/publish states.  
+   - 0.3.4-B: Ensure UI uses shared UI kit/layout, externalised strings, and a11y patterns; wire to stub content API.  
+   - 0.3.4-C: Plan and stub state management/data fetching for content forms.  
+   - 0.3.4-D: Include placeholders/controls for interactive blocks (math/chem/code sandbox/media embed) with UX notes; stub components.
 
 0.3.5 — LMS Player UI (Skeleton)  
-   - 0.3.5-A: Render basic lesson content with block placeholders; handle loading/error/empty states.  
-   - 0.3.5-B: Wire to Content API (read) and support locale-aware content display.  
-   - 0.3.5-C: Use shared UI kit/layout; externalise strings; ensure a11y for reading/navigation.
-   - 0.3.5-D: Support rendering placeholders for interactive blocks (math/chem visualisations, sandboxed code blocks, YouTube/media) with safe defaults.
+   - 0.3.5-A: Render basic lesson content with block placeholders; handle loading/error/empty states; wire to stub Content API.  
+   - 0.3.5-B: Support locale-aware content display; externalise strings; ensure a11y for reading/navigation.  
+   - 0.3.5-C: Use shared UI kit/layout; add placeholders for interactive blocks with safe defaults.
 
 0.3.6 — Content Localisation & Storage Integration  
-   - 0.3.6-A: Document how localized content is stored/retrieved (fields, fallbacks) and how Sanity vs Neon roles divide.  
-   - 0.3.6-B: Define how editors select/manage locales; update UX notes accordingly.
-   - 0.3.6-C: Note localisation handling for interactive blocks (math/chem/code content, captions) and media.
+   - 0.3.6-A: Document and stub how localized content is stored/retrieved (fields, fallbacks) and how Sanity vs Neon roles divide.  
+   - 0.3.6-B: Define how editors select/manage locales; update UX; wire selector to stub data.  
+   - 0.3.6-C: Note localisation handling for interactive blocks and media; stub translation toggles.
 
 0.3.7 — Telemetry & Compliance  
-   - 0.3.7-A: Define events for content create/edit/publish/view with locale/tenant metadata.  
-   - 0.3.7-B: Note sanitisation/logging rules for content payloads; avoid PII in logs; a11y checks for editor/player.
-   - 0.3.7-C: Plan telemetry for interactive block usage (e.g., code sandbox open/run, media plays) with safety constraints.
+   - 0.3.7-A: Define events for content create/edit/publish/view with locale/tenant metadata; add placeholder emitters.  
+   - 0.3.7-B: Note sanitisation/logging rules for content payloads; avoid PII; include a11y checks.  
+   - 0.3.7-C: Plan telemetry for interactive block usage with safety constraints; stub event hooks.
 
 0.3.8 — UI/UX Integration & Wiring  
-   - 0.3.8-A: Wire CMS/LMS nav into shell; ensure dashboard cards/links flow correctly.  
+   - 0.3.8-A: Wire CMS/LMS nav into shell; ensure dashboard cards/links flow correctly (stub data acceptable).  
    - 0.3.8-B: Verify editor/player UI uses shared components, externalised strings, and a11y patterns; ensure locale handling is consistent.  
-   - 0.3.8-C: Plan error/success/loading states across CMS/LMS surfaces.
+   - 0.3.8-C: Plan and stub error/success/loading states across CMS/LMS surfaces.
 
 0.3.9 — Integration & Carry-Forward  
-   - 0.3.9-A: Plan navigation wiring (CMS/LMS links, student dashboard cards) and redirect flows.  
-   - 0.3.9-B: Identify dependency touchpoints (auth/session, i18n) to ensure seamless UX.  
+   - 0.3.9-A: Plan navigation wiring (CMS/LMS links, student dashboard cards) and redirect flows; stub routes.  
+   - 0.3.9-B: Identify dependency touchpoints (auth/session, i18n) to ensure seamless UX; stub guards.  
    - 0.3.9-C: Update docs/changelog/prompt archive after implementation prompts.
 
 0.3.10 — Testing & Fixes  
    - 0.3.10-A: Run owner + Codex verification of CMS/LMS skeleton, localisation, and dashboard links; log issues.  
-   - 0.3.10-B: Apply fixes/polish; ensure externalised strings and a11y patterns; update docs/changelog/prompt archive.
-   - 0.3.10-C: Capture test plan/fixtures (even stubbed) for CMS/LMS editor/player flows.
+   - 0.3.10-B: Apply fixes/polish; ensure externalised strings and a11y patterns; update docs/changelog/prompt archive.  
+   - 0.3.10-C: Capture test plan/fixtures (even stubbed) for CMS/LMS editor/player flows.***
 
 ## Phase 0.4 — Unified Dashboard Shell + UI Kit
 - Purpose: Deliver the persistent layout and core UI kit components used across apps.
@@ -240,23 +246,23 @@ Carry-forward planning: each phase must include a task to integrate and polish f
 - Skeleton → Full: Shell and core components here; broader UI kit coverage, advanced states, theming, and polish continue in later phases as features expand.
 
 ### Phase 0.4 Sub-Phases (Prompt Checklist)
-0.4.1 — Docs & Specs  
-   - 0.4.1-A: Document layout architecture (header, left/right sidebars, main area, footer) and nav structure for LMS/CMS/Admin/Community/Dev Portal/Owner.  
-   - 0.4.1-B: Define UI kit scope for this phase (tokens, buttons, forms, typography, states, spacing) and a11y/i18n expectations.  
-   - 0.4.1-C: Capture footer requirements (links: help/docs, privacy, terms, support/contact, language selector) and settings/billing shells.  
-   - 0.4.1-D: UX notes/wireframes for shell navigation, account/settings, billing placeholders, locale switcher, and course cards with enrolment/progress.
+0.4.1 — Docs & Specs + Stubs  
+   - 0.4.1-A: Document layout architecture (header, left/right sidebars, main area, footer) and nav structure for LMS/CMS/Admin/Community/Dev Portal/Owner; scaffold layout package.  
+   - 0.4.1-B: Define UI kit scope for this phase (tokens, buttons, forms, typography, states, spacing) and a11y/i18n expectations; stub components.  
+   - 0.4.1-C: Capture footer requirements (links: help/docs, privacy, terms, support/contact, language selector) and settings/billing shells; stub footer component.  
+   - 0.4.1-D: UX notes/wireframes for shell navigation, account/settings, billing placeholders, locale switcher, and course cards with enrolment/progress; stub routes/placeholders.
 
 0.4.2 — Tokens & Theme Baseline  
-   - 0.4.2-A: Specify design tokens (colors, typography scale, spacing, radii, shadows) and theming approach.  
-   - 0.4.2-B: Document how tokens are consumed across apps/packages; note future theming extensions.
+   - 0.4.2-A: Specify design tokens (colors, typography scale, spacing, radii, shadows) and theming approach; implement token definitions in UI kit.  
+   - 0.4.2-B: Document how tokens are consumed across apps/packages; add sample usage in components; note future theming extensions.
 
 0.4.3 — Layout Package  
-   - 0.4.3-A: Define shell component structure (header, sidebars, main, footer) and composition API.  
-   - 0.4.3-B: Document responsive behavior and slotting for contextual nav/right-rail modules.
+   - 0.4.3-A: Define and implement shell component structure (header, sidebars, main, footer) and composition API.  
+   - 0.4.3-B: Document and implement responsive behavior and slotting for contextual nav/right-rail modules (skeleton components).
 
 0.4.4 — UI Kit Components (Initial)  
-   - 0.4.4-A: List core components for this phase (buttons, inputs, selects, forms, cards, nav items, alerts).  
-   - 0.4.4-B: Note a11y/i18n requirements per component (focus states, aria, externalised strings).
+   - 0.4.4-A: List and implement core components for this phase (buttons, inputs, selects, forms, cards, nav items, alerts).  
+   - 0.4.4-B: Apply a11y/i18n requirements per component (focus states, aria, externalised strings); add lint/tests stubs.
 
 0.4.5 — Theming & Tenant Customisation Groundwork  
    - 0.4.5-A: Define how tenants can override theme tokens (brand colors, logo, typography) safely.  
@@ -264,25 +270,25 @@ Carry-forward planning: each phase must include a task to integrate and polish f
    - 0.4.5-C: Note data model/config needs for per-tenant themes; defer implementation to later phases but ensure hooks exist in UI kit/layout.
 
 0.4.6 — Navigation & Shell Wiring  
-   - 0.4.6-A: Plan navigation stubs for LMS/CMS/Admin/Community/Dev Portal/Owner; sidebar/header link patterns.  
-   - 0.4.6-B: Define how locale switcher and account/settings entry appear in header/footer; billing link placement.  
-   - 0.4.6-C: Ensure all nav labels/strings are externalised; surface enrolled courses/progress cards in dashboard for students.
+   - 0.4.6-A: Implement navigation stubs for LMS/CMS/Admin/Community/Dev Portal/Owner; sidebar/header link patterns.  
+   - 0.4.6-B: Implement locale switcher and account/settings entry in header/footer; add billing link placement.  
+   - 0.4.6-C: Ensure all nav labels/strings are externalised; surface enrolled courses/progress cards in dashboard for students (stub data acceptable).
 
 0.4.7 — Account/Settings & Billing Shells  
-   - 0.4.7-A: Outline account/settings pages (profile basics, locale, preferences) using shared UI kit/layout.  
-   - 0.4.7-B: Outline billing page shell (tenant/owner placeholder) and required links in nav/footer.
+   - 0.4.7-A: Implement account/settings pages (profile basics, locale, preferences) using shared UI kit/layout; stub data.  
+   - 0.4.7-B: Implement billing page shell (tenant/owner placeholder) and required links in nav/footer.
 
-0.4.8 — Footer Implementation Plan  
-   - 0.4.8-A: Define footer structure, link targets (help/docs, privacy, terms, support/contact), and language selector integration.  
-   - 0.4.8-B: Ensure footer uses shared tokens/components and supports i18n/a11y.
+0.4.8 — Footer Implementation  
+   - 0.4.8-A: Implement footer structure, link targets (help/docs, privacy, terms, support/contact), and language selector integration.  
+   - 0.4.8-B: Ensure footer uses shared tokens/components and supports i18n/a11y; wire into shell.
 
 0.4.9 — Telemetry & Compliance  
    - 0.4.9-A: Plan events for navigation/shell interactions (nav click, locale change, settings/billing entry) with locale/tenant metadata.  
    - 0.4.9-B: Note compliance/privacy for footer links and support/contact flows (no PII in logs).
 
 0.4.10 — UI/UX Integration & Wiring  
-   - 0.4.10-A: Wire shell (header/sidebars/footer) and nav stubs into apps; ensure dashboard cards/links from 0.3 fit the shell.  
-   - 0.4.10-B: Verify shared UI kit/components are used; strings externalised; a11y patterns applied; responsive checks.
+   - 0.4.10-A: Wire shell (header/sidebars/footer) and nav stubs into apps; ensure dashboard cards/links from 0.3 fit the shell; run responsive checks.  
+   - 0.4.10-B: Verify shared UI kit/components are used; strings externalised; a11y patterns applied; fix gaps.
 
 0.4.11 — Integration & Carry-Forward  
    - 0.4.11-A: Confirm LMS/CMS auth/content pieces fit into the shell; ensure locale switcher/settings/billing links work end-to-end.  
@@ -307,21 +313,22 @@ Carry-forward planning: each phase must include a task to integrate and polish f
 - Entry Criteria: Content skeleton and shell/UI kit in place
 - Exit Criteria: Interactive blocks usable end-to-end in CMS/LMS; toolkit items surfaced in library; docs/tests/changelog updated
 - Skeleton → Full: Interactive blocks move from placeholders to functional; richer simulations and advanced tooling can expand later.
+- Implementation path: each sub-phase delivers docs/specs and runnable stubs/skeletons (API/routes, schemas/migrations, CMS/LMS UI, library surfacing). Iterate to working flows within this phase.***
 
 ### Phase 0.5 Sub-Phases (Prompt Checklist)
-0.5.1 — Docs & Specs  
-   - 0.5.1-A: Expand block catalog specs (math/LaTeX, chemistry, physics/biology visuals, code sandbox, media/YouTube) with UX and safety notes.  
-   - 0.5.1-B: Define how toolkit items appear in the library (metadata, cards, categorisation).  
+0.5.1 — Docs & Specs + Stubs  
+   - 0.5.1-A: Expand block catalog specs (math/LaTeX, chemistry, physics/biology visuals, code sandbox, media/YouTube) with UX and safety notes; stub block configs.  
+   - 0.5.1-B: Define how toolkit items appear in the library (metadata, cards, categorisation); stub library card components and API responses.  
    - 0.5.1-C: Update Content API spec with interactive block configs and validation.
 
 0.5.2 — Schema/Data Layer  
-   - 0.5.2-A: Refine schemas for interactive blocks (config fields, asset refs), including localisation fields.  
-   - 0.5.2-B: Outline migrations in docs; note any storage needs for assets/snippets.
+   - 0.5.2-A: Refine schemas for interactive blocks (config fields, asset refs), including localisation fields; add migration stubs.  
+   - 0.5.2-B: Outline migrations in docs; note any storage needs for assets/snippets; prepare migration scripts.  
    - Decision: Choose rendering/sandbox libraries for math/chem/code (document choice/rationale).
 
 0.5.3 — Content API & Domain Logic  
-   - 0.5.3-A: Detail handling for interactive blocks (validation, sanitisation, sandbox config, media safety).  
-   - 0.5.3-B: Define API responses for toolkit listings (for library surfacing).
+   - 0.5.3-A: Detail handling for interactive blocks (validation, sanitisation, sandbox config, media safety); implement API stubs.  
+   - 0.5.3-B: Define and stub API responses for toolkit listings (for library surfacing); implement response skeletons with docs.***
 
 0.5.4 — CMS Editor UI (Interactive Blocks)  
    - 0.5.4-A: Implement UX for inserting/configuring interactive blocks (controls for formulas, elements, code, media).  
@@ -361,26 +368,27 @@ Carry-forward planning: each phase must include a task to integrate and polish f
 - Entry Criteria: Lessons playable; layout/UI kit available
 - Exit Criteria: Progress persists; events emitted; docs updated; changelog updated
 - Skeleton → Full: Basic progress and events here; richer analytics, dashboards, and advanced progress logic added in later phases.
+- Implementation path: deliver docs/specs plus schema/migration stubs, API stubs, emitter stubs, and LMS UI indicators wired to stubbed data; evolve to working flows within the phase.***
 
 ### Phase 0.6 Sub-Phases (Prompt Checklist)
-0.6.1 — Docs & Specs  
-   - 0.6.1-A: Define progress model (course/module/lesson status, timestamps, scoring) and UX for indicators.  
-   - 0.6.1-B: Document analytics event schema for key actions (progress updates, content interactions), including locale/tenant metadata and consent behavior; note owner vs tenant reporting needs.  
-   - 0.6.1-C: Specify Progress API endpoints, payloads, validation, and error states.  
-   - 0.6.1-D: Capture scalability considerations for event volume (batching, back-pressure) and data retention.  
-   - 0.6.1-E: Note early warehouse fact/dimension shapes and KPIs to inform Phase 0.10 dashboards/BI.
+0.6.1 — Docs & Specs + Stubs  
+   - 0.6.1-A: Define progress model (course/module/lesson status, timestamps, scoring) and UX for indicators; stub schema/API notes.  
+   - 0.6.1-B: Document analytics event schema for key actions (progress updates, content interactions), including locale/tenant metadata and consent behavior; note owner vs tenant reporting needs; stub emitter shapes.  
+   - 0.6.1-C: Specify Progress API endpoints, payloads, validation, and error states; scaffold route/controller stubs.  
+   - 0.6.1-D: Capture scalability considerations for event volume (batching, back-pressure) and data retention; plan transport choice and retry/backoff stubs.  
+   - 0.6.1-E: Note early warehouse fact/dimension shapes and KPIs to inform Phase 0.10 dashboards/BI; stub schema notes.
 
 0.6.2 — Schema/Data Layer  
-   - 0.6.2-A: Add/describe schemas for progress tracking (tables/fields/relationships).  
-   - 0.6.2-B: Outline migrations in docs; note retention and compliance considerations.
+   - 0.6.2-A: Add/describe schemas for progress tracking (tables/fields/relationships); include migration stubs.  
+   - 0.6.2-B: Outline migrations in docs; note retention and compliance considerations; prep migration scripts.
 
 0.6.3 — Progress API & Domain Logic  
-   - 0.6.3-A: Detail endpoints for reading/updating progress; gating rules; validation.  
-   - 0.6.3-B: Define how analytics events are emitted from domain logic (consent-aware).
+   - 0.6.3-A: Detail endpoints for reading/updating progress; gating rules; validation; implement API stubs.  
+   - 0.6.3-B: Define how analytics events are emitted from domain logic (consent-aware); add emitter stubs.
 
 0.6.4 — LMS UI (Progress Indicators)  
-   - 0.6.4-A: Add progress UI in LMS (per lesson/course), with loading/error/empty states.  
-   - 0.6.4-B: Ensure shared UI kit/layout, externalised strings, a11y patterns.
+   - 0.6.4-A: Add progress UI in LMS (per lesson/course), with loading/error/empty states; wire to stub API/data.  
+   - 0.6.4-B: Ensure shared UI kit/layout, externalised strings, a11y patterns.***
 
 0.6.5 — Analytics Client/Emitter (Stub)  
    - 0.6.5-A: Document client API for emitting events; batching/stubbing approach.  
@@ -411,37 +419,38 @@ Carry-forward planning: each phase must include a task to integrate and polish f
 - Entry Criteria: Progress/content in place; auth ready
 - Exit Criteria: Permission checks active on core routes; docs/tests updated
 - Skeleton → Full: Initial enforcement here; more granular scopes and edge cases hardened in later phases.
+- Implementation path: docs/specs plus schema/migration stubs, permission engine/middleware stubs, API guards, and UI gating components wired to stubbed role data; evolve to working checks within the phase.***
 
 ### Phase 0.7 Sub-Phases (Prompt Checklist)
-0.7.1 — Docs & Specs  
-   - 0.7.1-A: Document entity model updates and role/permission taxonomy; map to LMS/CMS/Admin/Community surfaces.  
-   - 0.7.1-B: Define permission rules per action (content edit/publish, progress access, community actions, admin ops).  
-   - 0.7.1-C: Specify Permission API/middleware behaviors and error states; UX states for forbidden/unauthorized.
+0.7.1 — Docs & Specs + Stubs  
+   - 0.7.1-A: Document entity model updates and role/permission taxonomy; map to LMS/CMS/Admin/Community surfaces; stub role data.  
+   - 0.7.1-B: Define permission rules per action (content edit/publish, progress access, community actions, admin ops); prepare guard specs.  
+   - 0.7.1-C: Specify Permission API/middleware behaviors and error states; UX states for forbidden/unauthorized; scaffold middleware stubs.
 
 0.7.2 — Schema/Data Layer  
-   - 0.7.2-A: Describe schemas for roles, permissions, bindings, and entity relations; update ERD/docs.  
-   - 0.7.2-B: Outline migrations; note audit/logging fields for sensitive changes.
+   - 0.7.2-A: Describe schemas for roles, permissions, bindings, and entity relations; update ERD/docs; add migration stubs.  
+   - 0.7.2-B: Outline migrations; note audit/logging fields for sensitive changes; prep migration scripts.  
 
 0.7.3 — Permission Engine & Domain Logic  
-   - 0.7.3-A: Define resolution logic (inheritance, overrides, tenant scoping); performance considerations.  
-   - 0.7.3-B: Document how to integrate with services (guards/middleware/hooks) and with plugins later.
+   - 0.7.3-A: Define resolution logic (inheritance, overrides, tenant scoping); performance considerations; implement engine stubs.  
+   - 0.7.3-B: Document how to integrate with services (guards/middleware/hooks) and with plugins later; add integration examples.  
 
 0.7.4 — API Integration  
-   - 0.7.4-A: Identify and document API routes requiring checks; define consistent responses for denied access.  
-   - 0.7.4-B: Plan for future SSO/MFA impacts on permission checks.
+   - 0.7.4-A: Identify and document API routes requiring checks; define consistent responses for denied access; add guard stubs to routes.  
+   - 0.7.4-B: Plan for future SSO/MFA impacts on permission checks.  
 
 0.7.5 — UI/UX States  
-   - 0.7.5-A: Define UI patterns for gated/forbidden states (disabled, hidden, upsell/info states) using shared UI kit.  
+   - 0.7.5-A: Define and implement UI patterns for gated/forbidden states (disabled, hidden, upsell/info states) using shared UI kit.  
    - 0.7.5-B: Externalise strings; ensure a11y/i18n; consistent messaging across apps.  
-   - 0.7.5-C: Apply role-based dashboard module visibility (student/sub-tenant/tenant/admin/owner) for course cards and feature panels.
+   - 0.7.5-C: Apply role-based dashboard module visibility (student/sub-tenant/tenant/admin/owner) for course cards and feature panels; wire to stub role data.  
 
 0.7.6 — Audit & Compliance  
    - 0.7.6-A: Document audit events for permission changes; retention and privacy.  
    - 0.7.6-B: Note consent/security implications and logging redaction rules.
 
 0.7.7 — UI/UX Integration & Carry-Forward  
-   - 0.7.7-A: Wire permission gating into CMS/LMS/Admin/Community; verify nav/shell respect roles.  
-   - 0.7.7-B: Ensure reusable gating components/hooks are used; update docs/changelog/prompt archive.
+   - 0.7.7-A: Wire permission gating into CMS/LMS/Admin/Community; verify nav/shell respect roles; stub redirects/states.  
+   - 0.7.7-B: Ensure reusable gating components/hooks are used; update docs/changelog/prompt archive.  
 
 0.7.8 — Testing & Fixes  
    - 0.7.8-A: Run owner + Codex verification of permission checks/UI states; log issues.  
@@ -460,15 +469,16 @@ Carry-forward planning: each phase must include a task to integrate and polish f
 - Entry Criteria: Permissions/entity system available
 - Exit Criteria: Create/read threads; view profiles; docs in sync
 - Skeleton → Full: Basic forums/profiles here; moderation, richer profile content, and community features expand later.
+- Implementation path: deliver docs/specs plus schema/migration stubs, API stubs, and UI skeletons for forums/posts and profiles; wire to stub data and iterate to working flows within the phase.
 
 ### Phase 0.8 Sub-Phases (Prompt Checklist)
-0.8.1 — Docs & Specs  
-   - 0.8.1-A: Define community entities (forums, threads, posts) and profile basics; map roles to actions.  
-   - 0.8.1-B: Specify Community API (CRUD for threads/posts), validation, error states.  
-   - 0.8.1-C: Profile data model and API (public fields, privacy defaults); dashboard/profile UX notes.
+0.8.1 — Docs & Specs + Stubs  
+   - 0.8.1-A: Define community entities (forums, threads, posts) and profile basics; map roles to actions; stub role mappings.  
+   - 0.8.1-B: Specify Community API (CRUD for threads/posts), validation, error states; scaffold API route stubs.  
+   - 0.8.1-C: Profile data model and API (public fields, privacy defaults); dashboard/profile UX notes; stub profile API.
 
 0.8.2 — Schema/Data Layer  
-   - 0.8.2-A: Describe schemas for forums/threads/posts and profiles; update ERD/docs.  
+   - 0.8.2-A: Describe schemas for forums/threads/posts and profiles; update ERD/docs; add migration stubs.  
    - 0.8.2-B: Outline migrations; include locale fields where needed; audit fields for moderation.
 
 0.8.3 — Community API & Domain Logic  
@@ -507,37 +517,38 @@ Carry-forward planning: each phase must include a task to integrate and polish f
 - Entry Criteria: Stable layout and entity model
 - Exit Criteria: Can register a plugin and declare extensions (even if stubs); docs updated
 - Skeleton → Full: Registration and declared extension points here; execution/runtime hardening and richer SDK come later.
+- Implementation path: docs/specs plus schema/migration stubs, registry API stubs, plugin runtime/extension stubs, and management UI skeleton; iterate to working registration/extension flows within the phase.
 
 ### Phase 0.9 Sub-Phases (Prompt Checklist)
-0.9.1 — Docs & Specs  
-   - 0.9.1-A: Define plugin manifest format, scopes/permissions, lifecycle hooks, and extension points (content blocks, dashboard sidebars, community widgets).  
-   - 0.9.1-B: Document registry requirements (storage, activation state) and sandbox API shape (stub).  
-   - 0.9.1-C: Capture UX notes for plugin management UI (skeleton) and how extensions appear in UI surfaces.
+0.9.1 — Docs & Specs + Stubs  
+   - 0.9.1-A: Define plugin manifest format, scopes/permissions, lifecycle hooks, and extension points (content blocks, dashboard sidebars, community widgets); stub manifest examples.  
+   - 0.9.1-B: Document registry requirements (storage, activation state) and sandbox API shape; scaffold stub contracts.  
+   - 0.9.1-C: Capture UX notes for plugin management UI and how extensions appear in UI surfaces; stub UI flows.
 
 0.9.2 — Schema/Data Layer  
-   - 0.9.2-A: Describe registry schema (plugins, versions, scopes, activation, tenant bindings).  
-   - 0.9.2-B: Outline migrations; include audit fields; note compliance for data access declarations.
+   - 0.9.2-A: Describe registry schema (plugins, versions, scopes, activation, tenant bindings); add migration stubs.  
+   - 0.9.2-B: Outline migrations; include audit fields; note compliance for data access declarations; prep migration scripts.
 
 0.9.3 — Plugin Runtime Stubs  
-   - 0.9.3-A: Define sandbox API shape (stub): allowed APIs, event hooks, constraints.  
-   - 0.9.3-B: Document extension point contracts for content blocks, dashboard sidebars, community widgets.
-   - Decision: Select plugin sandbox/runtime approach/tooling (document choice/rationale).
+   - 0.9.3-A: Define sandbox API shape (stub): allowed APIs, event hooks, constraints; create runtime interface stubs.  
+   - 0.9.3-B: Document extension point contracts for content blocks, dashboard sidebars, community widgets; stub loaders.  
+   - Decision: Select plugin sandbox/runtime approach/tooling (document choice/rationale).  
 
 0.9.4 — Registry API & Management UI (Skeleton)  
-   - 0.9.4-A: Specify registry APIs (register/list/activate/deactivate).  
-   - 0.9.4-B: Build minimal management UI skeleton; externalise strings; apply i18n/a11y.
+   - 0.9.4-A: Specify and implement registry API stubs (register/list/activate/deactivate).  
+   - 0.9.4-B: Build minimal management UI skeleton; externalise strings; apply i18n/a11y; wire to API stubs.
 
 0.9.5 — UI Extension Wiring (Skeleton)  
-   - 0.9.5-A: Plan how to slot plugin-provided components into content rendering and dashboard/community sidebars.  
-   - 0.9.5-B: Ensure UI kit/layout patterns and role-based visibility apply; externalise strings.
+   - 0.9.5-A: Plan and stub how to slot plugin-provided components into content rendering and dashboard/community sidebars.  
+   - 0.9.5-B: Ensure UI kit/layout patterns and role-based visibility apply; externalise strings; add placeholder extension slots.  
 
 0.9.6 — Telemetry & Compliance  
    - 0.9.6-A: Define events for plugin lifecycle actions (register/activate/deactivate) and usage of plugin extensions.  
    - 0.9.6-B: Note consent/data access disclosures; audit logging for registry actions.
 
 0.9.7 — Integration & Carry-Forward  
-   - 0.9.7-A: Wire registry APIs to UI skeleton; ensure extension points are discoverable in content/community.  
-   - 0.9.7-B: Update docs/changelog/prompt archive after implementation prompts.
+   - 0.9.7-A: Wire registry APIs to UI skeleton; ensure extension points are discoverable in content/community; stub sample plugin.  
+   - 0.9.7-B: Update docs/changelog/prompt archive after implementation prompts.  
 
 0.9.8 — Testing & Fixes  
    - 0.9.8-A: Run owner + Codex verification of plugin registry and extension wiring (stubbed); log issues.  
@@ -556,29 +567,30 @@ Carry-forward planning: each phase must include a task to integrate and polish f
 - Entry Criteria: Events and progress hooks defined; plugin groundwork in place
 - Exit Criteria: Dashboard designs/shells, warehouse schema/plan, ETL plan documented; docs/tests/changelog updated
 - Skeleton → Full: Shells and plans here; deeper implementation/perf tuning continues in later phases.
+- Implementation path: deliver docs/specs plus warehouse schema/migration stubs, ETL/ingestion stubs, and dashboard UI shells wired to stub data; iterate to working dashboards within the phase.***
 
 ### Phase 0.10 Sub-Phases (Prompt Checklist)
-0.10.1 — Docs & Specs  
-   - 0.10.1-A: Define tenant and owner dashboard KPIs (course engagement, progress, toolkit usage, revenue later) and UX layouts.  
-   - 0.10.1-B: Document warehouse facts/dimensions, partitioning/retention strategy, and consent-aware filtering.  
-   - 0.10.1-C: Specify ETL/ingestion approach (batch/stream), back-pressure handling, and error reporting.
+0.10.1 — Docs & Specs + Stubs  
+   - 0.10.1-A: Define tenant and owner dashboard KPIs (course engagement, progress, toolkit usage, revenue later) and UX layouts; stub charts/cards.  
+   - 0.10.1-B: Document warehouse facts/dimensions, partitioning/retention strategy, and consent-aware filtering; stub schemas.  
+   - 0.10.1-C: Specify ETL/ingestion approach (batch/stream), back-pressure handling, and error reporting; stub pipeline configs.
 
 0.10.2 — Schema/Data Layer  
-   - 0.10.2-A: Describe warehouse schemas (facts/dims) and metadata required for locale/tenant segmentation.  
-   - 0.10.2-B: Note migrations/data pipelines to populate initial warehouse tables (doc-first).
+   - 0.10.2-A: Describe warehouse schemas (facts/dims) and metadata required for locale/tenant segmentation; add migration stubs.  
+   - 0.10.2-B: Note migrations/data pipelines to populate initial warehouse tables; prepare scripts/stubs.
 
 0.10.3 — ETL/Ingestion Plan  
-   - 0.10.3-A: Plan pipelines from event emitter to warehouse (batch/stream), including consent filters and redaction.  
-   - 0.10.3-B: Define monitoring/alerting for pipelines.
+   - 0.10.3-A: Plan pipelines from event emitter to warehouse (batch/stream), including consent filters and redaction; stub ETL jobs.  
+   - 0.10.3-B: Define monitoring/alerting for pipelines; stub alerts/dashboards.  
    - Decision: Choose event transport and warehouse engine; document charting library choice and data freshness targets.
 
 0.10.4 — Dashboard UI Shells  
-   - 0.10.4-A: Build tenant dashboard shell (cards/charts) using shared UI kit; externalise strings; a11y/i18n.  
-   - 0.10.4-B: Build owner dashboard shell for platform-wide metrics.
+   - 0.10.4-A: Build tenant dashboard shell (cards/charts) using shared UI kit; externalise strings; a11y/i18n; wire to stub data.  
+   - 0.10.4-B: Build owner dashboard shell for platform-wide metrics; stub data sources.
 
 0.10.5 — Performance & Scale  
-   - 0.10.5-A: Set performance budgets for queries/dashboards; plan caching/aggregation.  
-   - 0.10.5-B: Document scale considerations for millions of users/events.
+   - 0.10.5-A: Set performance budgets for queries/dashboards; plan caching/aggregation; add placeholder configs.  
+   - 0.10.5-B: Document scale considerations for millions of users/events; outline load test plan stubs.
 
 0.10.6 — Telemetry & Compliance  
    - 0.10.6-A: Ensure consent-aware data usage; retention policies applied; no PII in dashboards/logs.  
@@ -590,7 +602,7 @@ Carry-forward planning: each phase must include a task to integrate and polish f
 
 0.10.8 — Testing & Fixes  
    - 0.10.8-A: Run owner + Codex verification of dashboard shells and data plans; log issues.  
-   - 0.10.8-B: Apply fixes/polish; capture test plan/fixtures; ensure i18n/a11y/compliance.
+   - 0.10.8-B: Apply fixes/polish; capture test plan/fixtures; ensure i18n/a11y/compliance.  
 
 ## Phase 0.11 — Deployability, Observability & Ops
 - Purpose: Prepare for production deployment.
@@ -605,6 +617,7 @@ Carry-forward planning: each phase must include a task to integrate and polish f
 - Entry Criteria: Core features stable
 - Exit Criteria: Deployable baseline with observability; docs updated
 - Skeleton → Full: Baseline deploy/observability here; deeper SLOs, scaling, and ops automation continue through 0.17.
+- Implementation path: deliver docs plus deploy/infra configs, logging/monitoring setup stubs, backup/restore scripts, and perf/load test plans; iterate to working deploy with observability.***
 
 ### Phase 0.11 Sub-Phases (Prompt Checklist)
 0.11.1 — Docs & Architecture  
@@ -657,6 +670,7 @@ Carry-forward planning: each phase must include a task to integrate and polish f
 - Entry Criteria: Deployable single-tenant baseline
 - Exit Criteria: Multi-tenant enabled and enforced; enterprise requirements documented and met; docs/tests updated; changelog entry
 - Skeleton → Full: Tenant isolation and enterprise features solidified here; final polish and launch readiness in 0.17/1.0.
+- Implementation path: deliver docs/specs plus tenancy schema/migration changes, enforcement middleware/guards, tenant switcher UI, per-tenant config UI, and SSO/SAML stubs (if in scope); iterate to working multi-tenant flows.***
 
 ### Phase 0.12 Sub-Phases (Prompt Checklist)
 0.12.1 — Docs & Specs  
