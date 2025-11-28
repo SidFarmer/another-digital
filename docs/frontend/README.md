@@ -26,6 +26,7 @@ This document outlines the frontend scope and principles. Implementation follows
 - i18n hook usage: consume shared i18n provider/hooks; namespaces required for auth/settings (`auth.login`, `auth.signup`, `auth.reset`, `settings.account`). Externalise labels/help/errors/success states; avoid hardcoded strings.
 - I18n infrastructure: shared package `packages/i18n` (planned) for provider/hooks and bundles; per-app namespaces loaded from `/apps/*` message bundles. Locale detection order: user setting → persisted preference → Accept-Language → default `en-US`; fallback to default locale on missing keys. Split bundles by route/surface to keep payloads small. Use shared formatting utils (dates/numbers) from the i18n package; avoid in-component formatting logic.
 - Language switcher: lives in shell and settings; updates persisted preference and reloads bundles; defaults to `en-US` if unset/unsupported.***
+ - New product areas: externalise all user-facing strings into shared i18n namespaces; add per-area namespaces under `packages/i18n` bundles; avoid inline strings; reuse patterns for auth/settings (labels, errors, success, hints).***
 
 ## Future
 - Theming/customisation for tenants; richer dashboards; workspace entry points; marketplace flows as later phases land.***
