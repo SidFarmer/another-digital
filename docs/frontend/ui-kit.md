@@ -52,3 +52,4 @@ graph TD
 ## Integration
 - Used by all apps; aligns with layout package, i18n provider, and permission gating patterns.
 - Acts as base for plugin-provided UI extensions; ensure extension slots use same tokens and a11y/i18n conventions.
+- A11y checks (planned): enforce eslint-plugin-jsx-a11y in CI; add Storybook/axe or Playwright a11y smoke tests once components exist; keep tokens/layout enforcing focus/contrast; treat any a11y lint error as a required fix.
