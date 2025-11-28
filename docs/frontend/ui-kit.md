@@ -28,6 +28,7 @@ Provide shared components and design tokens for all apps, enforcing consistency,
 - Theming: consume tokens; allow tenant overrides via theme hooks; never inline brand colors.
 - Composition: favor controlled components; expose minimal props; avoid prop drilling business logic.
 - Cross-app wiring: ensure layout/ui/i18n packages are the source of truth; avoid app-specific forks of components or ad-hoc a11y patterns.
+- Accessibility requirements (forms/components): every field has a visible label and `aria-describedby` for errors/help; focus order follows visual order; return focus when dialogs close; tab/shift-tab works; ESC closes overlays; error summaries are non-revealing for auth; maintain visible focus states and sufficient contrast; avoid color-only cues.
 
 ## Patterns
 - Forms: show validation inline; on submit, show consolidated errors; prevent double-submit; keep assistive text tied to inputs.
