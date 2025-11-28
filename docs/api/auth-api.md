@@ -107,6 +107,7 @@ Defines authentication endpoints for initial phases (0.2). Session/token model i
 ## Errors
 - Use structured errors: `{ code, message, details? }`
 - Do not leak whether an email exists on reset request.
+- Client wiring (0.2.10): UI uses fetch stubs for login/signup/reset/settings; assumes HTTP-only cookies for tokens; no localStorage. Messages are externalised and use aria-live. Telemetry emitters fire on login/signup/reset/settings with locale/consent/analytics flags (stubbed backend).
 
 ### Error Catalog
 | HTTP | Code                 | Message (example)                     | When                                                 |
