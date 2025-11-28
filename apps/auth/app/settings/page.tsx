@@ -1,9 +1,11 @@
 import { t } from "../i18n";
 
 export default function SettingsPage() {
+  const messageId = "settings-message";
   return (
     <div className="card stack" aria-labelledby="settings-title">
       <h1 id="settings-title">{t("settingsTitle")}</h1>
+      <div id={messageId} aria-live="polite" className="sr-only"></div>
       <form className="stack">
         <div>
           <label htmlFor="displayName">{t("settingsDisplayName")}</label>
@@ -21,7 +23,9 @@ export default function SettingsPage() {
             <input id="analyticsOptIn" name="analyticsOptIn" type="checkbox" /> {t("settingsAnalytics")}
           </label>
         </div>
-        <button type="submit">{t("settingsSave")}</button>
+        <button type="submit" aria-describedby={messageId}>
+          {t("settingsSave")}
+        </button>
       </form>
     </div>
   );

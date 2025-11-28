@@ -2,9 +2,11 @@ import Link from "next/link";
 import { t } from "../i18n";
 
 export default function SignupPage() {
+  const messageId = "signup-message";
   return (
     <div className="card stack" aria-labelledby="signup-title">
       <h1 id="signup-title">{t("signupTitle")}</h1>
+      <div id={messageId} aria-live="assertive" className="sr-only"></div>
       <form className="stack">
         <div>
           <label htmlFor="name">{t("signupName")}</label>
@@ -30,7 +32,9 @@ export default function SignupPage() {
             <input id="consent" name="consent" type="checkbox" /> {t("signupConsent")}
           </label>
         </div>
-        <button type="submit">{t("signupSubmit")}</button>
+        <button type="submit" aria-describedby={messageId}>
+          {t("signupSubmit")}
+        </button>
       </form>
       <div className="hint">
         {t("signupHaveAccount")} <Link href="/">{t("navLogin")}</Link>
