@@ -1,18 +1,19 @@
 import Link from "next/link";
+import { t } from "../i18n";
 
 export default function ResetRequestPage() {
   return (
     <div className="card stack" aria-labelledby="reset-title">
-      <h1 id="reset-title">Reset password</h1>
+      <h1 id="reset-title">{t("resetTitle")}</h1>
       <form className="stack">
         <div>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">{t("resetEmail")}</label>
           <input id="email" name="email" type="email" autoComplete="email" required />
         </div>
-        <button type="submit">Send reset link</button>
+        <button type="submit">{t("resetSubmit")}</button>
       </form>
       <div className="hint">
-        <Link href="/">Back to login</Link>
+        <Link href="/">{t("resetBack")}</Link>
       </div>
     </div>
   );
