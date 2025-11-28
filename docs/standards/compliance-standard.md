@@ -10,6 +10,7 @@ This standard defines the minimum privacy and data protection requirements (e.g.
 - Obtain explicit consent where required (tracking, marketing, cookies). Record consent version, timestamp, and locale.
 - Provide clear privacy notices in the user’s preferred language.
 - Honour opt-out for analytics/marketing where applicable.
+- Auth/Settings placements (0.2+): show consent/notice on signup; link from login; surface consent/version and analytics opt-in toggles in settings. Persist consentVersion/consentGivenAt; default analytics to off unless explicitly enabled. Provide locale-aware notice text pulled from shared i18n bundles.
 
 ## 3. Data Subject Rights (DSR)
 - Support access/export (portable format), rectification, and deletion requests.
@@ -32,8 +33,9 @@ This standard defines the minimum privacy and data protection requirements (e.g.
 - Prefer regional endpoints for tenants if supported.
 
 ## 7. Logging & Monitoring
-- No PII in debug logs. Mask/redact by default.
+- No PII in debug logs. Mask/redact by default (emails, tokens, IPs, names).
 - Maintain audit logs for auth, admin actions, permission changes, DSR handling.
+- Auth/Settings logging rules: do not log passwords/tokens/reset links; avoid logging full email; if unavoidable, hash/truncate; log consent changes with version/timestamp only; never log personal answers or secret prompts.
 
 ## 8. Security Controls
 - Enforce authentication/authorization at all entry points.

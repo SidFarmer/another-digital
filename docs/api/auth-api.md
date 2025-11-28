@@ -101,6 +101,8 @@ Defines authentication endpoints for initial phases (0.2). Session/token model i
 ## Locale & Consent
 - Capture preferred locale on signup and in session payloads.
 - Add consent flags when available; ensure consent-aware analytics events.
+- Consent/notice placements: show consent/notice copy (per locale) on signup; link from login; expose consentVersion/consentGivenAt and analytics opt-in/out in settings. Use shared i18n strings; default analytics to off unless explicitly enabled.
+- Logging guardrails: do not log passwords/tokens/reset links; avoid logging full email/PII. If email must appear in traces, hash/truncate. Log consent updates with version/timestamp only; avoid recording free-form answers in logs.
 
 ## Errors
 - Use structured errors: `{ code, message, details? }`
