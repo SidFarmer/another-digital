@@ -127,8 +127,8 @@ Carry-forward planning: each phase must include a task to integrate and polish f
    - 0.2.9-C: Wire shell nav stubs for auth/settings; ensure accessibility patterns are applied; keep CI green with stubs.
 
 0.2.10 — Integration & Hardening (Skeleton)  
-   - 0.2.10-A: Plan wiring of auth UI to auth API, token storage, error handling, and redirect flows.  
-   - 0.2.10-B: Define telemetry events for auth (login/signup/reset) with locale/tenant metadata.  
+   - 0.2.10-A: Implement auth UI → auth API wiring (login/signup/reset/settings): fetch calls aligned to API spec, safe token/session handling (prefer HTTP-only cookies; stub header flow if needed), redirects, consent/analytics flags, aria-live/i18n messaging, and placeholder telemetry emitters.  
+   - 0.2.10-B: Define and implement telemetry emitters for auth events (login/signup/reset/settings) with locale/tenant metadata; stub backend ingestion if needed.  
    - 0.2.10-C: Update docs/changelog/prompt archive after completing implementation prompts.
 
 0.2.11 — Testing & Fixes  
