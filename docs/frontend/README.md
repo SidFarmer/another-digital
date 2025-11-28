@@ -23,6 +23,7 @@ This document outlines the frontend scope and principles. Implementation follows
 ## Integration
 - Use shared packages: layout, ui, i18n, api client, analytics emitter
 - Respect permissions/tenant scope for navigation and module visibility
+- i18n hook usage: consume shared i18n provider/hooks; namespaces required for auth/settings (`auth.login`, `auth.signup`, `auth.reset`, `settings.account`). Externalise labels/help/errors/success states; avoid hardcoded strings.
 
 ## Future
 - Theming/customisation for tenants; richer dashboards; workspace entry points; marketplace flows as later phases land.***
