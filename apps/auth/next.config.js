@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true
+  reactStrictMode: true,
+  transpilePackages: ["@another-digital/i18n"]
 };
 
 module.exports = nextConfig;

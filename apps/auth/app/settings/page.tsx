@@ -1,6 +1,9 @@
-import { t } from "../i18n";
+"use client";
+
+import { useI18n } from "@another-digital/i18n";
 
 export default function SettingsPage() {
+  const { t } = useI18n();
   const messageId = "settings-message";
   return (
     <div className="card stack" aria-labelledby="settings-title">

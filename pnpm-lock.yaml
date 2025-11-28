@@ -10,6 +10,9 @@ importers:
 
   apps/auth:
     dependencies:
+      '@another-digital/i18n':
+        specifier: workspace:*
+        version: link:../../packages/i18n
       next:
         specifier: 14.2.3
         version: 14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -32,6 +35,8 @@ importers:
       typescript:
         specifier: ^5.4.5
         version: 5.9.3
+
+  packages/i18n: {}
 
 packages:
 

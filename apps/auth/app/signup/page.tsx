@@ -1,7 +1,10 @@
+"use client";
+
 import Link from "next/link";
-import { t } from "../i18n";
+import { useI18n } from "@another-digital/i18n";
 
 export default function SignupPage() {
+  const { t } = useI18n();
   const messageId = "signup-message";
   return (
     <div className="card stack" aria-labelledby="signup-title">
