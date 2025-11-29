@@ -19,6 +19,7 @@
     "format": "echo \"stub: format (wire up tooling when packages exist)\"",
     "build": "echo \"stub: build (wire up tooling when packages exist)\"",
     "prisma:generate": "prisma generate",
-    "i18n:check": "node scripts/i18n-check.js"
+    "i18n:check": "node scripts/i18n-check.js",
+    "telemetry:check": "node scripts/telemetry-check.js"
   }
 }
