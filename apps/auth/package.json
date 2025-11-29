@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@another-digital/i18n": "workspace:*",
+    "clsx": "^2.1.1",
     "bcryptjs": "^2.4.3",
     "next": "14.2.3",
     "react": "18.3.1",

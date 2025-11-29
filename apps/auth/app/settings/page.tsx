@@ -2,14 +2,21 @@
 
 import { useI18n } from "@another-digital/i18n";
 import { saveSettings } from "../api-client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Banner } from "../components/Banner";
 
 export default function SettingsPage() {
   const { t } = useI18n();
-  const messageId = "settings-message";
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const alertRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (error && alertRef.current) {
+      alertRef.current.focus();
+    }
+  }, [error]);
 
   async function onSubmit(formData: FormData) {
     setLoading(true);
@@ -31,19 +38,12 @@ export default function SettingsPage() {
   return (
     <div className="card stack" aria-labelledby="settings-title">
       <h1 id="settings-title">{t("settingsTitle")}</h1>
-      <div id={messageId} aria-live="polite" className="sr-only">
-        {message || error || ""}
-      </div>
       {error && (
-        <div role="alert" className="error">
+        <Banner tone="error" ref={alertRef}>
           {error}
-        </div>
+        </Banner>
       )}
-      {message && (
-        <div role="status" className="hint">
-          {message}
-        </div>
-      )}
+      {message && <Banner tone="success">{message}</Banner>}
       <form className="stack" action={onSubmit}>
         <div>
           <label htmlFor="displayName">{t("settingsDisplayName")}</label>
@@ -61,8 +61,8 @@ export default function SettingsPage() {
             <input id="analyticsOptIn" name="analyticsOptIn" type="checkbox" /> {t("settingsAnalytics")}
           </label>
         </div>
-        <button type="submit" aria-describedby={messageId} disabled={loading}>
-          {t("settingsSave")}
+        <button type="submit" disabled={loading}>
+          {loading ? `${t("settingsSave")}...` : t("settingsSave")}
         </button>
       </form>
     </div>

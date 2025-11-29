@@ -56,7 +56,9 @@ function ShellContent({ children }: { children: React.ReactNode }) {
     <>
       <header>
         <div className="shell">
-          <div className="brand">{t("brand")}</div>
+          <Link href="/" className="brand">
+            {t("brand")}
+          </Link>
           <nav aria-label="Primary">
             <Link href="/">{t("navLogin")}</Link>
             <Link href="/signup">{t("navSignup")}</Link>

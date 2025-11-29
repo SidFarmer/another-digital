@@ -4,15 +4,22 @@ import Link from "next/link";
 import { useI18n } from "@another-digital/i18n";
 import { requestReset } from "../api-client";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Banner } from "../components/Banner";
 
 export default function ResetRequestPage() {
   const { t } = useI18n();
-  const messageId = "reset-message";
   const router = useRouter();
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const alertRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (error && alertRef.current) {
+      alertRef.current.focus();
+    }
+  }, [error]);
 
   async function onSubmit(formData: FormData) {
     setLoading(true);
@@ -20,7 +27,7 @@ export default function ResetRequestPage() {
     setError(null);
     try {
       await requestReset({ email: String(formData.get("email") || "") });
-      setMessage(t("resetSubmit"));
+      setMessage(t("resetSuccess") ?? t("resetSubmit"));
       router.push("/"); // back to login placeholder
     } catch (err) {
       setError(t("resetError") ?? "Unable to send reset link");
@@ -32,26 +39,19 @@ export default function ResetRequestPage() {
   return (
     <div className="card stack" aria-labelledby="reset-title">
       <h1 id="reset-title">{t("resetTitle")}</h1>
-      <div id={messageId} aria-live="polite" className="sr-only">
-        {message || error || ""}
-      </div>
       {error && (
-        <div role="alert" className="error">
+        <Banner tone="error" ref={alertRef}>
           {error}
-        </div>
+        </Banner>
       )}
-      {message && (
-        <div role="status" className="hint">
-          {message}
-        </div>
-      )}
+      {message && <Banner tone="success">{message}</Banner>}
       <form className="stack" action={onSubmit}>
         <div>
           <label htmlFor="email">{t("resetEmail")}</label>
           <input id="email" name="email" type="email" autoComplete="email" required />
         </div>
-        <button type="submit" aria-describedby={messageId} disabled={loading}>
-          {t("resetSubmit")}
+        <button type="submit" disabled={loading}>
+          {loading ? `${t("resetSubmit")}...` : t("resetSubmit")}
         </button>
       </form>
       <div className="hint">

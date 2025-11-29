@@ -4,15 +4,22 @@ import Link from "next/link";
 import { useI18n } from "@another-digital/i18n";
 import { login } from "./api-client";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Banner } from "./components/Banner";
 
 export default function LoginPage() {
   const { t } = useI18n();
-  const messageId = "login-message";
   const router = useRouter();
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const alertRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (error && alertRef.current) {
+      alertRef.current.focus();
+    }
+  }, [error]);
 
   async function onSubmit(formData: FormData) {
     setLoading(true);
@@ -23,7 +30,7 @@ export default function LoginPage() {
         email: String(formData.get("email") || ""),
         password: String(formData.get("password") || "")
       });
-      setMessage(t("loginSubmit"));
+      setMessage(t("loginSuccess") ?? t("loginSubmit"));
       if (typeof window !== "undefined") {
         window.dispatchEvent(new Event("auth-changed"));
       }
@@ -38,19 +45,12 @@ export default function LoginPage() {
   return (
     <div className="card stack" aria-labelledby="login-title">
       <h1 id="login-title">{t("loginTitle")}</h1>
-      <div id={messageId} aria-live="assertive" className="sr-only">
-        {message || error || ""}
-      </div>
       {error && (
-        <div role="alert" className="error">
+        <Banner tone="error" ref={alertRef}>
           {error}
-        </div>
+        </Banner>
       )}
-      {message && (
-        <div role="status" className="hint">
-          {message}
-        </div>
-      )}
+      {message && <Banner tone="success">{message}</Banner>}
       <form className="stack" action={onSubmit}>
         <div>
           <label htmlFor="email">{t("loginEmail")}</label>
@@ -60,8 +60,8 @@ export default function LoginPage() {
           <label htmlFor="password">{t("loginPassword")}</label>
           <input id="password" name="password" type="password" autoComplete="current-password" required />
         </div>
-        <button type="submit" aria-describedby={messageId} disabled={loading}>
-          {t("loginSubmit")}
+        <button type="submit" disabled={loading}>
+          {loading ? `${t("loginSubmit")}...` : t("loginSubmit")}
         </button>
         <div className="hint">
           <Link href="/reset">{t("loginForgot")}</Link>
