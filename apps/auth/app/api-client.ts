@@ -25,6 +25,14 @@ type AuthResponse = {
   sessionId?: string;
 };
 
+export async function getSession() {
+  const res = await fetch("/api/auth/session", { method: "GET" });
+  if (!res.ok) {
+    return { authenticated: false };
+  }
+  return handle<{ authenticated: boolean; user?: { id: string; email: string; name?: string; locale?: string } }>(res);
+}
+
 function getCsrfToken() {
   if (typeof document === "undefined") return undefined;
   const match = document.cookie.split("; ").find((c) => c.startsWith("csrfToken="));

@@ -141,6 +141,7 @@ Carry-forward planning: each phase must include a task to integrate and polish f
    - 0.2.12-B: Use HTTP-only cookies for sessions/tokens; add CSRF protection for cookie flows; avoid localStorage.  
    - 0.2.12-C: Wire frontend client to real endpoints; keep stub fallback for CI; update error handling and redirects.  
    - 0.2.12-D: Add logout flow (UI + API) and route guards (stub) for protected pages.
+   - 0.2.12-E: Cleanup/stage auth work (routes/client/i18n/styling/prompt), handle DB artifacts/duplicates, and commit coherently.***
 
 0.2.13 — Auth UX Polish & Messaging  
    - 0.2.13-A: Add explicit success/error banners/toasts using shared UI kit; aria-live and focus management on errors.  

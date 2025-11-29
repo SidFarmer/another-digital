@@ -13,6 +13,7 @@ const authMessages: Catalog = {
     navSignup: "Signup",
     navReset: "Reset",
     navSettings: "Settings",
+    navLogout: "Logout",
     footerSettings: "Settings",
     footerReset: "Reset password",
     footerSignup: "Create account",
