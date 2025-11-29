@@ -152,6 +152,7 @@ Carry-forward planning: each phase must include a task to integrate and polish f
    - 0.2.14-A: Persist locale (cookie/context) and pass locale in API requests/telemetry; ensure switcher updates UI.  
    - 0.2.14-B: Add additional locale stub (e.g., es-ES) and validate no hardcoded strings; add i18n test checklist.  
    - 0.2.14-C: Document i18n loading strategy (per-app bundles, fallback) and add lint/check to prevent hardcoded strings.
+   - 0.2.14-D: Implement multi-locale (en/fr/de/ar/he) with RTL support, expand bundles/switcher, add i18n lint/extraction checks and automation for maintaining translations.***
 
 0.2.15 — Telemetry & Compliance Hardening  
    - 0.2.15-A: Replace console stub with real telemetry client (or stub endpoint) with schema validation; no PII.  

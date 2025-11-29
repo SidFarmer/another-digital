@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { I18nProvider, authMessages, useI18n } from "@another-digital/i18n";
 import { logout, getSession } from "./api-client";
 import { REDIRECTS } from "./lib/redirects";
+import { getLocaleFromCookie, setLocaleCookie, getDefaultLocale } from "./lib/locale";
 
 function ShellContent({ children }: { children: React.ReactNode }) {
   const { t } = useI18n();
@@ -14,9 +15,11 @@ function ShellContent({ children }: { children: React.ReactNode }) {
   const [sessionState, setSessionState] = useState<{ authenticated: boolean; email?: string }>({
     authenticated: false
   });
+  const [locale, setLocale] = useState<string>(getDefaultLocale());
 
   useEffect(() => {
     let mounted = true;
+    setLocale(getLocaleFromCookie());
     const refreshSession = () => {
       getSession()
         .then((res) => {
@@ -41,6 +44,12 @@ function ShellContent({ children }: { children: React.ReactNode }) {
       window.removeEventListener("auth-changed", handler);
     };
   }, []);
+
+  function handleLocaleChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    const next = e.target.value;
+    setLocale(next);
+    setLocaleCookie(next);
+  }
 
   async function handleLogout() {
     setLoggingOut(true);
@@ -78,7 +87,7 @@ function ShellContent({ children }: { children: React.ReactNode }) {
             <label htmlFor="shell-locale" className="sr-only">
               {t("localeLabel")}
             </label>
-            <select id="shell-locale" name="locale" defaultValue="en-US">
+            <select id="shell-locale" name="locale" value={locale} onChange={handleLocaleChange}>
               <option value="en-US">{t("localeEnUS")}</option>
               <option value="en-GB">{t("localeEnGB")}</option>
             </select>
@@ -102,7 +111,7 @@ function ShellContent({ children }: { children: React.ReactNode }) {
             <label htmlFor="footer-locale" className="sr-only">
               {t("localeLabel")}
             </label>
-            <select id="footer-locale" name="locale" defaultValue="en-US">
+            <select id="footer-locale" name="locale" value={locale} onChange={handleLocaleChange}>
               <option value="en-US">{t("localeEnUS")}</option>
               <option value="en-GB">{t("localeEnGB")}</option>
             </select>
@@ -114,8 +123,17 @@ function ShellContent({ children }: { children: React.ReactNode }) {
 }
 
 export default function Shell({ children }: { children: React.ReactNode }) {
+  const [locale, setLocale] = useState<string>(getDefaultLocale());
+
+  useEffect(() => {
+    setLocale(getLocaleFromCookie());
+    const handler = () => setLocale(getLocaleFromCookie());
+    window.addEventListener("locale-changed", handler);
+    return () => window.removeEventListener("locale-changed", handler);
+  }, []);
+
   return (
-    <I18nProvider locale="en-US" messages={authMessages}>
+    <I18nProvider locale={locale} messages={authMessages}>
       <ShellContent>{children}</ShellContent>
     </I18nProvider>
   );
