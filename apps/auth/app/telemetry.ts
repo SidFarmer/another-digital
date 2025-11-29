@@ -1,19 +1,48 @@
 "use client";
 
-type AuthEvent =
-  | "login"
-  | "signup"
-  | "reset_request"
-  | "settings_save";
+import type { TelemetryEvent, TelemetryPayload } from "./lib/telemetry-schema";
+import { validateTelemetry } from "./lib/telemetry-schema";
 
-type AuthEventData = Record<string, unknown>;
-
-export function trackAuthEvent(event: AuthEvent, data: AuthEventData) {
-  // Placeholder emitter; replace with real telemetry client later.
-  // Keep side effects minimal to avoid breaking CI.
-  if (process.env.NODE_ENV !== "production") {
-    console.debug("[auth-event]", event, data);
+async function sendTelemetry(payload: TelemetryPayload) {
+  const validation = validateTelemetry(payload as Record<string, unknown>);
+  if (!validation.valid) {
+    console.warn("[telemetry] invalid payload", validation.errors);
+    return;
   }
+
+  try {
+    await fetch("/api/telemetry", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(validation.payload),
+      keepalive: true
+    });
+  } catch (err) {
+    // Fail closed: do not interrupt auth flows for telemetry failures.
+    if (process.env.NODE_ENV !== "production") {
+      console.warn("[telemetry] send failed", err);
+    }
+  }
+}
+
+function buildPayload(event: TelemetryEvent, data: Record<string, unknown>): TelemetryPayload {
+  // Strictly whitelist allowed fields to prevent PII leakage.
+  const { locale, tenantId, consent, analyticsOptIn, version } = data;
+  return {
+    event,
+    timestamp: new Date().toISOString(),
+    locale: typeof locale === "string" ? locale : undefined,
+    tenantId: typeof tenantId === "string" ? tenantId : undefined,
+    consent: typeof consent === "boolean" ? consent : undefined,
+    analyticsOptIn: typeof analyticsOptIn === "boolean" ? analyticsOptIn : undefined,
+    version: typeof version === "string" ? version : undefined,
+    source: "auth-app"
+  };
+}
+
+function trackAuthEvent(event: TelemetryEvent, data: Record<string, unknown>) {
+  const payload = buildPayload(event, data);
+  void sendTelemetry(payload);
 }
 
 export function trackLogin(locale?: string, tenantId?: string) {
