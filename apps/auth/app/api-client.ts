@@ -25,61 +25,64 @@ type AuthResponse = {
   sessionId?: string;
 };
 
-const simulate = async <T>(fn: () => T): Promise<T> => {
-  await new Promise((resolve) => setTimeout(resolve, 300));
-  return fn();
-};
-
-const shouldFail = (email?: string) => email && email.includes("fail");
+async function handle<T>(res: Response): Promise<T> {
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    const code = (data as any)?.code;
+    const message = (data as any)?.message;
+    const err = new Error(message || code || "Request failed");
+    (err as any).code = code;
+    throw err;
+  }
+  return data as T;
+}
 
 export async function login(payload: AuthPayload): Promise<AuthResponse> {
-  return simulate(() => {
-    if (shouldFail(payload.email)) {
-      throw new Error("invalid_credentials");
-    }
-    const res = {
-      userId: "user-1",
-      email: payload.email,
-      name: "Sample User",
-      locale: payload.locale ?? "en-US",
-      sessionId: "sess-1"
-    };
-    trackLogin(res.locale);
-    return res;
+  const res = await fetch("/api/auth/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
   });
+  const data = await handle<AuthResponse>(res);
+  trackLogin(data.locale);
+  return data;
 }
 
 export async function signup(payload: AuthPayload): Promise<AuthResponse> {
-  return simulate(() => {
-    if (shouldFail(payload.email)) {
-      throw new Error("email_exists");
-    }
-    const res = {
-      userId: "user-2",
-      email: payload.email,
-      name: payload.name ?? "New User",
-      locale: payload.locale ?? "en-US",
-      sessionId: "sess-2"
-    };
-    trackSignup(res.locale, undefined, payload.consent ?? false, payload.analyticsOptIn ?? false);
-    return res;
+  const res = await fetch("/api/auth/signup", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
   });
+  const data = await handle<AuthResponse>(res);
+  trackSignup(data.locale, undefined, payload.consent ?? false, payload.analyticsOptIn ?? false);
+  return data;
 }
 
 export async function requestReset(payload: { email: string }) {
-  return simulate(() => {
-    if (!payload.email) throw new Error("invalid_request");
-    trackResetRequest();
-    return { success: true };
+  const res = await fetch("/api/auth/reset/request", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
   });
+  await handle(res);
+  trackResetRequest();
+  return { success: true };
 }
 
 export async function saveSettings(payload: SettingsPayload) {
-  return simulate(() => {
-    trackSettingsSave(payload.locale, undefined, payload.analyticsOptIn);
-    return { success: true };
+  const res = await fetch("/api/auth/settings", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
   });
+  await handle(res);
+  trackSettingsSave(payload.locale, undefined, payload.analyticsOptIn);
+  return { success: true };
 }
 
-// Tokens: assume server sets HTTP-only cookie; do not store tokens in localStorage.
-// If headers are needed later, add a fetch wrapper that injects Authorization safely.
+export async function logout() {
+  const res = await fetch("/api/auth/logout", { method: "POST" });
+  await handle(res);
+  return { success: true };
+}

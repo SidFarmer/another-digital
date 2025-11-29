@@ -26,6 +26,7 @@ const authMessages: Catalog = {
     loginForgot: "Forgot password?",
     loginCreate: "Create an account",
     loginNewHere: "New here?",
+    loginError: "Email or password is incorrect",
     signupTitle: "Create account",
     signupName: "Name",
     signupEmail: "Email",
@@ -34,15 +35,19 @@ const authMessages: Catalog = {
     signupConsent: "I agree to the terms and privacy notice",
     signupSubmit: "Create account",
     signupHaveAccount: "Already have an account?",
+    signupError: "Unable to create account",
     resetTitle: "Reset password",
     resetEmail: "Email",
     resetSubmit: "Send reset link",
     resetBack: "Back to login",
+    resetError: "Unable to send reset link",
     settingsTitle: "Settings",
     settingsDisplayName: "Display name",
     settingsLocale: "Locale",
     settingsAnalytics: "Allow analytics (consent-aware)",
-    settingsSave: "Save changes"
+    settingsSave: "Save changes",
+    settingsSaved: "Settings saved",
+    settingsError: "Unable to save settings"
   },
   "en-GB": {
     brand: "Another Digital",
@@ -63,6 +68,7 @@ const authMessages: Catalog = {
     loginForgot: "Forgot password?",
     loginCreate: "Create an account",
     loginNewHere: "New here?",
+    loginError: "Email or password is incorrect",
     signupTitle: "Create account",
     signupName: "Name",
     signupEmail: "Email",
@@ -71,15 +77,19 @@ const authMessages: Catalog = {
     signupConsent: "I agree to the terms and privacy notice",
     signupSubmit: "Create account",
     signupHaveAccount: "Already have an account?",
+    signupError: "Unable to create account",
     resetTitle: "Reset password",
     resetEmail: "Email",
     resetSubmit: "Send reset link",
     resetBack: "Back to login",
+    resetError: "Unable to send reset link",
     settingsTitle: "Settings",
     settingsDisplayName: "Display name",
     settingsLocale: "Locale",
     settingsAnalytics: "Allow analytics (consent-aware)",
-    settingsSave: "Save changes"
+    settingsSave: "Save changes",
+    settingsSaved: "Settings saved",
+    settingsError: "Unable to save settings"
   }
 };
 

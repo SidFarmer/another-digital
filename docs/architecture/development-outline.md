@@ -136,6 +136,32 @@ Carry-forward planning: each phase must include a task to integrate and polish f
    - 0.2.11-B: Apply fixes/tweaks; ensure all strings are externalised; update docs/changelog/prompt archive.
    - 0.2.11-C: Capture test plan/fixtures (even stubbed) for auth/i18n/a11y flows.
 
+0.2.12 — Auth Backend Wiring (Real Endpoints)  
+   - 0.2.12-A: Implement real auth endpoints (login/signup/logout/reset-request/reset-confirm/settings) via server routes/API; align with `docs/api/auth-api.md`.  
+   - 0.2.12-B: Use HTTP-only cookies for sessions/tokens; add CSRF protection for cookie flows; avoid localStorage.  
+   - 0.2.12-C: Wire frontend client to real endpoints; keep stub fallback for CI; update error handling and redirects.  
+   - 0.2.12-D: Add logout flow (UI + API) and route guards (stub) for protected pages.
+
+0.2.13 — Auth UX Polish & Messaging  
+   - 0.2.13-A: Add explicit success/error banners/toasts using shared UI kit; aria-live and focus management on errors.  
+   - 0.2.13-B: Add loading states/spinners and disable submit during requests; ensure non-revealing auth errors.  
+   - 0.2.13-C: Ensure redirect targets are correct (dashboard/settings/login) and configurable; document flows.
+
+0.2.14 — Locale Persistence & i18n Expansion  
+   - 0.2.14-A: Persist locale (cookie/context) and pass locale in API requests/telemetry; ensure switcher updates UI.  
+   - 0.2.14-B: Add additional locale stub (e.g., es-ES) and validate no hardcoded strings; add i18n test checklist.  
+   - 0.2.14-C: Document i18n loading strategy (per-app bundles, fallback) and add lint/check to prevent hardcoded strings.
+
+0.2.15 — Telemetry & Compliance Hardening  
+   - 0.2.15-A: Replace console stub with real telemetry client (or stub endpoint) with schema validation; no PII.  
+   - 0.2.15-B: Include locale/tenant/consent/analytics flags in events; add error handling/backoff stubs.  
+   - 0.2.15-C: Add basic CI check for telemetry schema (stubbed JSON schema) and update docs/changelog.
+
+0.2.16 — Lint/Test/CI Enablement  
+   - 0.2.16-A: Enable eslint with jsx-a11y and shared config; fix auth/i18n issues.  
+   - 0.2.16-B: Add basic unit/component tests for auth forms (React Testing Library/Playwright smoke); wire to CI.  
+   - 0.2.16-C: Wire format/lint/test/typecheck scripts in root/app packages and ensure CI runs them.***
+
 ### 0.1 / 0.2 Consistency Checklist
 - Standards complete and reflected in `docs/README.md` and `docs/index.md`: developer, documentation, code-style, naming, testing, task-format, git-workflow, environment, filesystem guardrails, security, compliance, doc-first (plus optional license/CONTRIBUTING/branch strategy).
 - Monorepo layout matches `monorepo-structure.md`; baseline workspace/package configs present.
