@@ -90,6 +90,7 @@ function ShellContent({ children }: { children: React.ReactNode }) {
             <select id="shell-locale" name="locale" value={locale} onChange={handleLocaleChange}>
               <option value="en-US">{t("localeEnUS")}</option>
               <option value="en-GB">{t("localeEnGB")}</option>
+              <option value="es-ES">{t("localeEsES")}</option>
             </select>
           </form>
         </div>
@@ -114,6 +115,7 @@ function ShellContent({ children }: { children: React.ReactNode }) {
             <select id="footer-locale" name="locale" value={locale} onChange={handleLocaleChange}>
               <option value="en-US">{t("localeEnUS")}</option>
               <option value="en-GB">{t("localeEnGB")}</option>
+              <option value="es-ES">{t("localeEsES")}</option>
             </select>
           </form>
         </div>
