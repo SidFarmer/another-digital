@@ -1,6 +1,6 @@
 # @another-digital/i18n
 
-Shared i18n skeleton for apps. Provides a simple provider/hook and sample auth/settings bundles (en-US/en-GB). Intended to be replaced/expanded with real localization pipeline later.
+Shared i18n skeleton for apps. Provides a simple provider/hook and auth/settings bundles (en-US/en-GB/es-ES). Intended to be replaced/expanded with real localization pipeline later.
 
 ## Usage
 ```tsx
@@ -21,6 +21,6 @@ export function Root({ children }) {
 ```
 
 ## Notes
-- Messages are stubbed for auth/settings; add more namespaces as needed.
-- Keep strings externalised; extend catalogs per app/locale.
-- Pair with eslint-plugin-jsx-a11y and CI linting to enforce accessible UIs.
+- Messages are stubbed for auth/settings; add more namespaces/locales as needed (see `messages.json`).
+- Keep strings externalised; extend catalogs per app/locale. Run `pnpm i18n:check` to ensure keys match across locales.
+- Pair with eslint-plugin-jsx-a11y and CI linting to enforce accessible UIs; add i18n checks to CI when available.
