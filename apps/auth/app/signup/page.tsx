@@ -28,6 +28,9 @@ export default function SignupPage() {
         analyticsOptIn: Boolean(formData.get("analyticsOptIn"))
       });
       setMessage(t("signupSubmit"));
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(new Event("auth-changed"));
+      }
       router.push("/"); // dashboard placeholder
     } catch (err) {
       setError(t("signupError") ?? "Unable to create account");

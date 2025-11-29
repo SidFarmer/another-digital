@@ -24,6 +24,9 @@ export default function LoginPage() {
         password: String(formData.get("password") || "")
       });
       setMessage(t("loginSubmit"));
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(new Event("auth-changed"));
+      }
       router.push("/"); // dashboard placeholder
     } catch (err) {
       setError(t("loginError") ?? "Email or password is incorrect");
