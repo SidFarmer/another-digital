@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "../lib/prisma";
-import { createSession, hashPassword, setSessionCookie } from "../lib/auth";
+import { createSession, hashPassword, setCsrfCookie, setSessionCookie, validateCsrf, generateCsrfToken } from "../lib/auth";
 
 export async function POST(request: Request) {
   try {
@@ -8,6 +8,11 @@ export async function POST(request: Request) {
     const { email, password, name, locale, consent, analyticsOptIn } = body || {};
     if (!email || !password || !name) {
       return NextResponse.json({ code: "invalid_request", message: "Email, password, and name are required" }, { status: 400 });
+    }
+    try {
+      validateCsrf(request, false);
+    } catch (err: any) {
+      return NextResponse.json({ code: err?.message ?? "csrf_invalid", message: "Invalid CSRF token" }, { status: 403 });
     }
     const existing = await prisma.user.findUnique({ where: { email: String(email).toLowerCase() } });
     if (existing) {
@@ -25,7 +30,9 @@ export async function POST(request: Request) {
       }
     });
     const session = await createSession(user.id);
+    const csrfToken = generateCsrfToken();
     setSessionCookie(session.token, session.expiresAt);
+    setCsrfCookie(csrfToken);
     const res = NextResponse.json({
       userId: user.id,
       email: user.email,

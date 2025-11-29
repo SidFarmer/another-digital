@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { consumeResetToken, hashPassword } from "../../lib/auth";
+import { consumeResetToken, hashPassword, validateCsrf } from "../../lib/auth";
 import { prisma } from "../../lib/prisma";
 
 export async function POST(request: Request) {
@@ -8,6 +8,11 @@ export async function POST(request: Request) {
     const { token, newPassword } = body || {};
     if (!token || !newPassword) {
       return NextResponse.json({ code: "invalid_request", message: "Token and newPassword are required" }, { status: 400 });
+    }
+    try {
+      validateCsrf(request);
+    } catch (err: any) {
+      return NextResponse.json({ code: err?.message ?? "csrf_invalid", message: "Invalid CSRF token" }, { status: 403 });
     }
     const userId = await consumeResetToken(String(token));
     const passwordHash = await hashPassword(String(newPassword));

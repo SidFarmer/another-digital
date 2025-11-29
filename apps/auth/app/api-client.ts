@@ -25,6 +25,12 @@ type AuthResponse = {
   sessionId?: string;
 };
 
+function getCsrfToken() {
+  if (typeof document === "undefined") return undefined;
+  const match = document.cookie.split("; ").find((c) => c.startsWith("csrfToken="));
+  return match?.split("=", 2)[1];
+}
+
 async function handle<T>(res: Response): Promise<T> {
   const data = await res.json().catch(() => ({}));
   if (!res.ok) {
@@ -38,10 +44,12 @@ async function handle<T>(res: Response): Promise<T> {
 }
 
 export async function login(payload: AuthPayload): Promise<AuthResponse> {
+  const csrf = getCsrfToken();
   const res = await fetch("/api/auth/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
+    body: JSON.stringify(payload),
+    ...(csrf ? { headers: { "Content-Type": "application/json", "x-csrf-token": csrf } } : {})
   });
   const data = await handle<AuthResponse>(res);
   trackLogin(data.locale);
@@ -49,9 +57,10 @@ export async function login(payload: AuthPayload): Promise<AuthResponse> {
 }
 
 export async function signup(payload: AuthPayload): Promise<AuthResponse> {
+  const csrf = getCsrfToken();
   const res = await fetch("/api/auth/signup", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", ...(csrf ? { "x-csrf-token": csrf } : {}) },
     body: JSON.stringify(payload)
   });
   const data = await handle<AuthResponse>(res);
@@ -60,9 +69,10 @@ export async function signup(payload: AuthPayload): Promise<AuthResponse> {
 }
 
 export async function requestReset(payload: { email: string }) {
+  const csrf = getCsrfToken();
   const res = await fetch("/api/auth/reset/request", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", ...(csrf ? { "x-csrf-token": csrf } : {}) },
     body: JSON.stringify(payload)
   });
   await handle(res);
@@ -71,9 +81,10 @@ export async function requestReset(payload: { email: string }) {
 }
 
 export async function saveSettings(payload: SettingsPayload) {
+  const csrf = getCsrfToken();
   const res = await fetch("/api/auth/settings", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", ...(csrf ? { "x-csrf-token": csrf } : {}) },
     body: JSON.stringify(payload)
   });
   await handle(res);
@@ -82,7 +93,11 @@ export async function saveSettings(payload: SettingsPayload) {
 }
 
 export async function logout() {
-  const res = await fetch("/api/auth/logout", { method: "POST" });
+  const csrf = getCsrfToken();
+  const res = await fetch("/api/auth/logout", {
+    method: "POST",
+    ...(csrf ? { headers: { "x-csrf-token": csrf } } : {})
+  });
   await handle(res);
   return { success: true };
 }

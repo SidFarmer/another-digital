@@ -1,9 +1,15 @@
 import { NextResponse } from "next/server";
 import { getSessionUser } from "../lib/auth";
 import { prisma } from "../lib/prisma";
+import { validateCsrf } from "../lib/auth";
 
 export async function POST(request: Request) {
   try {
+    try {
+      validateCsrf(request);
+    } catch (err: any) {
+      return NextResponse.json({ code: err?.message ?? "csrf_invalid", message: "Invalid CSRF token" }, { status: 403 });
+    }
     const currentUser = await getSessionUser();
     if (!currentUser) {
       return NextResponse.json({ code: "unauthorized", message: "Unauthorized" }, { status: 401 });

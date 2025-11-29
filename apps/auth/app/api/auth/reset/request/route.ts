@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "../../lib/prisma";
-import { createResetToken } from "../../lib/auth";
+import { createResetToken, validateCsrf } from "../../lib/auth";
 
 export async function POST(request: Request) {
   try {
@@ -8,6 +8,11 @@ export async function POST(request: Request) {
     const { email } = body || {};
     if (!email) {
       return NextResponse.json({ code: "invalid_request", message: "Email is required" }, { status: 400 });
+    }
+    try {
+      validateCsrf(request, false);
+    } catch (err: any) {
+      return NextResponse.json({ code: err?.message ?? "csrf_invalid", message: "Invalid CSRF token" }, { status: 403 });
     }
     const user = await prisma.user.findUnique({ where: { email: String(email).toLowerCase() } });
     if (user) {
