@@ -14,6 +14,7 @@ export default function ResetRequestPage() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const alertRef = useRef<HTMLDivElement>(null);
+  const redirectTarget = "/";
 
   useEffect(() => {
     if (error && alertRef.current) {
@@ -28,7 +29,7 @@ export default function ResetRequestPage() {
     try {
       await requestReset({ email: String(formData.get("email") || "") });
       setMessage(t("resetSuccess") ?? t("resetSubmit"));
-      router.push("/"); // back to login placeholder
+      router.push(redirectTarget); // back to login placeholder
     } catch (err) {
       setError(t("resetError") ?? "Unable to send reset link");
     } finally {

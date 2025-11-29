@@ -14,6 +14,7 @@ export default function SignupPage() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const alertRef = useRef<HTMLDivElement>(null);
+  const redirectTarget = "/";
 
   useEffect(() => {
     if (error && alertRef.current) {
@@ -38,7 +39,7 @@ export default function SignupPage() {
       if (typeof window !== "undefined") {
         window.dispatchEvent(new Event("auth-changed"));
       }
-      router.push("/"); // dashboard placeholder
+      router.push(redirectTarget); // dashboard placeholder
     } catch (err) {
       setError(t("signupError") ?? "Unable to create account");
     } finally {

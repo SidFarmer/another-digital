@@ -66,7 +66,7 @@ function ShellContent({ children }: { children: React.ReactNode }) {
             <Link href="/settings">{t("navSettings")}</Link>
             {sessionState.authenticated ? (
               <button type="button" onClick={handleLogout} disabled={loggingOut} className="link-button">
-                {loggingOut ? "Logging out..." : "Logout"}
+                {loggingOut ? `${t("navLogout")}...` : t("navLogout")}
               </button>
             ) : null}
           </nav>
@@ -93,7 +93,7 @@ function ShellContent({ children }: { children: React.ReactNode }) {
             <Link href="/signup">{t("footerSignup")}</Link>
             {sessionState.authenticated ? (
               <button type="button" onClick={handleLogout} disabled={loggingOut} className="link-button">
-                {loggingOut ? "Logging out..." : "Logout"}
+                {loggingOut ? `${t("navLogout")}...` : t("navLogout")}
               </button>
             ) : null}
           </div>
