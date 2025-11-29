@@ -16,6 +16,7 @@ function ShellContent({ children }: { children: React.ReactNode }) {
     authenticated: false
   });
   const [locale, setLocale] = useState<string>(getDefaultLocale());
+  const rtlLocales = ["ar", "he"];
 
   useEffect(() => {
     let mounted = true;
@@ -38,10 +39,15 @@ function ShellContent({ children }: { children: React.ReactNode }) {
     refreshSession();
     const handler = () => refreshSession();
     window.addEventListener("auth-changed", handler);
-
+    const handleLocaleChanged = () => setLocale(getLocaleFromCookie());
+    window.addEventListener("locale-changed", handleLocaleChanged);
+    const currentLocale = getLocaleFromCookie();
+    document.documentElement.lang = currentLocale;
+    document.documentElement.dir = rtlLocales.includes(currentLocale) ? "rtl" : "ltr";
     return () => {
       mounted = false;
       window.removeEventListener("auth-changed", handler);
+      window.removeEventListener("locale-changed", handleLocaleChanged);
     };
   }, []);
 
@@ -49,6 +55,8 @@ function ShellContent({ children }: { children: React.ReactNode }) {
     const next = e.target.value;
     setLocale(next);
     setLocaleCookie(next);
+    document.documentElement.lang = next;
+    document.documentElement.dir = rtlLocales.includes(next) ? "rtl" : "ltr";
   }
 
   async function handleLogout() {
@@ -91,6 +99,10 @@ function ShellContent({ children }: { children: React.ReactNode }) {
               <option value="en-US">{t("localeEnUS")}</option>
               <option value="en-GB">{t("localeEnGB")}</option>
               <option value="es-ES">{t("localeEsES")}</option>
+              <option value="fr-FR">{t("localeFrFR")}</option>
+              <option value="de-DE">{t("localeDeDE")}</option>
+              <option value="ar">{t("localeAr")}</option>
+              <option value="he">{t("localeHe")}</option>
             </select>
           </form>
         </div>
@@ -116,6 +128,10 @@ function ShellContent({ children }: { children: React.ReactNode }) {
               <option value="en-US">{t("localeEnUS")}</option>
               <option value="en-GB">{t("localeEnGB")}</option>
               <option value="es-ES">{t("localeEsES")}</option>
+              <option value="fr-FR">{t("localeFrFR")}</option>
+              <option value="de-DE">{t("localeDeDE")}</option>
+              <option value="ar">{t("localeAr")}</option>
+              <option value="he">{t("localeHe")}</option>
             </select>
           </form>
         </div>
