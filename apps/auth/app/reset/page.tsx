@@ -6,6 +6,7 @@ import { requestReset } from "../api-client";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Banner } from "../components/Banner";
+import { REDIRECTS } from "../lib/redirects";
 
 export default function ResetRequestPage() {
   const { t } = useI18n();
@@ -14,7 +15,6 @@ export default function ResetRequestPage() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const alertRef = useRef<HTMLDivElement>(null);
-  const redirectTarget = "/";
 
   useEffect(() => {
     if (error && alertRef.current) {
@@ -29,7 +29,7 @@ export default function ResetRequestPage() {
     try {
       await requestReset({ email: String(formData.get("email") || "") });
       setMessage(t("resetSuccess") ?? t("resetSubmit"));
-      router.push(redirectTarget); // back to login placeholder
+      router.push(REDIRECTS.reset); // back to login placeholder
     } catch (err) {
       setError(t("resetError") ?? "Unable to send reset link");
     } finally {

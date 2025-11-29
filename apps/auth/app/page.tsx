@@ -6,6 +6,7 @@ import { login } from "./api-client";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Banner } from "./components/Banner";
+import { REDIRECTS } from "./lib/redirects";
 
 export default function LoginPage() {
   const { t } = useI18n();
@@ -14,7 +15,6 @@ export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const alertRef = useRef<HTMLDivElement>(null);
-  const redirectTarget = "/";
 
   useEffect(() => {
     if (error && alertRef.current) {
@@ -35,7 +35,7 @@ export default function LoginPage() {
       if (typeof window !== "undefined") {
         window.dispatchEvent(new Event("auth-changed"));
       }
-      router.push(redirectTarget); // dashboard placeholder
+      router.push(REDIRECTS.login); // dashboard placeholder
     } catch (err) {
       setError(t("loginError") ?? "Email or password is incorrect");
     } finally {

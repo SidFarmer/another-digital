@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { I18nProvider, authMessages, useI18n } from "@another-digital/i18n";
 import { logout, getSession } from "./api-client";
+import { REDIRECTS } from "./lib/redirects";
 
 function ShellContent({ children }: { children: React.ReactNode }) {
   const { t } = useI18n();
@@ -48,7 +49,7 @@ function ShellContent({ children }: { children: React.ReactNode }) {
     } finally {
       setLoggingOut(false);
       setSessionState({ authenticated: false });
-      router.push("/");
+      router.push(REDIRECTS.logout);
     }
   }
 
